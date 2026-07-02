@@ -29,14 +29,19 @@ tailwind.config = {
         playfair: ["'Playfair Display'", 'serif'],
       },
       keyframes: {
-        iSlide: { to: { transform: 'translateY(0)' } },
+        // Upgraded intro text slide to incorporate an elegant fade-in opacity layer
+        iSlide: { 
+          '0%': { transform: 'translateY(110%)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' } 
+        },
         navDrop: { to: { transform: 'translateY(0)' } },
         dotPulse: { '0%,100%': { opacity: 1 }, '50%': { opacity: 0.3 } },
         heroIn: { to: { opacity: 1, transform: 'translateY(0)' } },
         floatY: { '0%,100%': { transform: 'translateY(0) rotate(var(--r,0deg))' }, '50%': { transform: 'translateY(-10px) rotate(var(--r,0deg))' } },
       },
       animation: {
-        iSlide: 'iSlide 0.85s cubic-bezier(0.22,1,0.36,1) forwards',
+        // Fine-tuned cinematic easing profile for ultra-smooth intro slide
+        iSlide: 'iSlide 1.2s cubic-bezier(0.215, 0.61, 0.355, 1) forwards',
         navDrop: 'navDrop 0.9s cubic-bezier(0.22,1,0.36,1) forwards',
         dotPulse: 'dotPulse 2s ease-in-out infinite',
         heroIn: 'heroIn 0.9s cubic-bezier(0.22,1,0.36,1) forwards',
@@ -52,14 +57,14 @@ tailwind.config = {
 <div class="pointer-events-none fixed inset-0 z-[200] opacity-[0.04] mix-blend-overlay" style="background-image:url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;)"></div>
 
 <div id="intro-overlay" class="fixed inset-0 z-[2000] flex flex-col items-center justify-center overflow-hidden pointer-events-none">
-  <div id="ip-top" class="absolute left-0 right-0 top-0 h-1/2 bg-burgundy transition-transform duration-[850ms] ease-[cubic-bezier(0.76,0,0.24,1)]"></div>
-  <div id="ip-bot" class="absolute left-0 right-0 bottom-0 h-1/2 bg-burgundy transition-transform duration-[850ms] ease-[cubic-bezier(0.76,0,0.24,1)]"></div>
+  <div id="ip-top" class="absolute left-0 right-0 top-0 h-1/2 bg-burgundy transition-transform duration-[1100ms] ease-[cubic-bezier(0.85,0,0.15,1)]"></div>
+  <div id="ip-bot" class="absolute left-0 right-0 bottom-0 h-1/2 bg-burgundy transition-transform duration-[1100ms] ease-[cubic-bezier(0.85,0,0.15,1)]"></div>
   <div class="relative z-[5] flex flex-col items-center">
     <div class="overflow-hidden my-[0.05rem]">
-      <span class="block translate-y-[110%] font-playfair text-[clamp(2.5rem,8vw,8rem)] tracking-[-0.02em] text-cream animate-iSlide [animation-delay:0.1s]">Rideema Singh</span>
+      <span class="block opacity-0 translate-y-[110%] font-playfair text-[clamp(2.5rem,8vw,8rem)] tracking-[-0.02em] text-cream animate-iSlide [animation-delay:0.15s]">Rideema Singh</span>
     </div>
     <div class="overflow-hidden my-[0.05rem]">
-      <span class="block translate-y-[110%] font-fraunces italic text-[clamp(2rem,6vw,6rem)] text-tan animate-iSlide [animation-delay:0.28s]">Portfolio ’26</span>
+      <span class="block opacity-0 translate-y-[110%] font-fraunces italic text-[clamp(2rem,6vw,6rem)] text-tan animate-iSlide [animation-delay:0.35s]">Portfolio ’26</span>
     </div>
   </div>
 </div>
@@ -100,15 +105,17 @@ tailwind.config = {
 
 <section id="hero" class="min-h-screen flex flex-col justify-center px-5 md:px-10 pt-24 pb-12 relative overflow-hidden bg-burgundy [background-image:radial-gradient(circle,rgba(240,232,216,0.10)_1.5px,transparent_2px)] [background-size:28px_28px]">
   <h1 id="hero-title" class="opacity-0 translate-y-[30px] font-playfair text-[clamp(3.5rem,12vw,11rem)] leading-[0.92] text-cream text-center max-w-[1400px] mx-auto tracking-[-0.02em]">Rideema Singh</h1>
-<div id="hero-sub" class="opacity-0 translate-y-[30px] font-mono text-[clamp(0.65rem,1.5vw,0.85rem)] uppercase tracking-[0.4em] font-bold text-[rgba(240,232,216,0.9)] text-tan text-center mt-6">S&middot;O&middot;F&middot;T&middot;W&middot;A&middot;R&middot;E&nbsp;&nbsp;D&middot;E&middot;V&middot;E&middot;L&middot;O&middot;P&middot;E&middot;R</div>
+<div id="hero-sub" class="opacity-0 translate-y-[30px] font-mono text-[clamp(0.65rem,1.5vw,0.85rem)] uppercase tracking-[0.4em] font-bold text-[rgba(240,232,216,0.9)] text-center mt-6">S&middot;O&middot;F&middot;T&middot;W&middot;A&middot;R&middot;E&nbsp;&nbsp;D&middot;E&middot;V&middot;E&middot;L&middot;O&middot;P&middot;E&middot;R</div>
   <p id="hero-tag" class="opacity-0 translate-y-[30px] font-fraunces italic text-[clamp(1rem,2.2vw,1.5rem)] text-[rgba(240,232,216,0.8)] text-center max-w-[580px] mx-auto mt-8 leading-[1.5]">Frontend developer &middot; MERN engineer &middot; creative mind crafting interfaces that feel like cinema.</p>
   <div id="hero-ctas" class="opacity-0 translate-y-[30px] flex justify-center gap-4 flex-wrap mt-12">
-    <a href="#work" class="font-bold text-[0.95rem] uppercase tracking-[0.25em] text-burgundy bg-cream px-8 py-[0.85rem] rounded-full no-underline transition-transform hover:scale-[1.04] hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)]">View Resume</a>
-    <a href="#contact" class="font-bold text-[0.95rem] uppercase tracking-[0.25em] text-burgundy bg-tan px-8 py-[0.85rem] rounded-full border border-[rgba(240,232,216,0.35)] no-underline transition-colors hover:bg-[rgba(240,232,216,0.1)] hover:text-cream">Get in touch &rarr;</a>
+    <a href="#work" class="font-mono text-[0.95rem] uppercase tracking-[0.25em] text-burgundy bg-cream px-8 py-[0.85rem] rounded-full no-underline transition-transform hover:scale-[1.04] hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)]">View Resume</a>
+    <a href="#contact" class="font-mono text-[0.95rem] uppercase tracking-[0.25em] text-burgundy bg-tan px-8 py-[0.85rem] rounded-full border border-[rgba(240,232,216,0.35)] no-underline transition-colors hover:bg-[rgba(240,232,216,0.1)] hover:text-cream">Get in touch</a>
   </div>
-  <svg id="hero-star-1" class="absolute text-tan opacity-70 animate-floatY w-[60px] h-[60px] left-[3%] top-[35%]" style="--r:-15deg" viewBox="0 0 60 60"><path d="M30 5 L34 26 L55 30 L34 34 L30 55 L26 34 L5 30 L26 26 Z" fill="currentColor"/></svg>
-  <svg id="hero-star-3" class="absolute text-tan opacity-70 animate-floatY w-[40px] h-[40px] right-[6%] top-[65%]" style="--r:20deg" viewBox="0 0 60 60"><path d="M30 5 L34 26 L55 30 L34 34 L30 55 L26 34 L5 30 L26 26 Z" fill="currentColor"/></svg>
-
+  <svg id="hero-star-1" class="absolute text-tan opacity-0 animate-floatY w-[60px] h-[60px] left-[3%] top-[35%]" style="--r:-15deg" viewBox="0 0 60 60"><path d="M30 5 L34 26 L55 30 L34 34 L30 55 L26 34 L5 30 L26 26 Z" fill="currentColor"/></svg>
+  <svg id="hero-star-2" class="absolute text-tan opacity-0 animate-floatY w-[22px] h-[22px] right-[18%] top-[28%]" viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="currentColor" stroke-width="4"/><line x1="30" y1="8" x2="30" y2="52" stroke="currentColor" stroke-width="3"/><line x1="8" y1="30" x2="52" y2="30" stroke="currentColor" stroke-width="3"/></svg>
+  <svg id="hero-star-3" class="absolute text-tan opacity-100 animate-floatY w-[40px] h-[40px] right-[6%] top-[65%]" style="--r:20deg" viewBox="0 0 60 60"><path d="M30 5 L34 26 L55 30 L34 34 L30 55 L26 34 L5 30 L26 26 Z" fill="currentColor"/></svg>
+ <svg id="hero-star-4" class="absolute text-tan opacity-100 animate-floatY w-[32px] h-[32px] left-[15%] top-[70%]" style="--r:-5deg" viewBox="0 0 60 60"><path d="M30 5 L34 26 L55 30 L34 34 L30 55 L26 34 L5 30 L26 26 Z" fill="currentColor"/></svg>
+  <svg id="hero-star-5" class="absolute text-tan opacity-100 animate-floatY w-[26px] h-[26px] left-[25%] top-[20%]" viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="currentColor" stroke-width="4"/><line x1="30" y1="8" x2="30" y2="52" stroke="currentColor" stroke-width="3"/><line x1="8" y1="30" x2="52" y2="30" stroke="currentColor" stroke-width="3"/></svg>
 </section>
 
 <section id="about" class="bg-cream2 text-burgundy [background-image:linear-gradient(rgba(61,26,26,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(61,26,26,0.04)_1px,transparent_1px)] [background-size:48px_48px] py-12 px-5 md:px-10">
@@ -283,7 +290,7 @@ tailwind.config = {
 
 <section id="education" class="bg-cream2 text-burgundy [background-image:linear-gradient(rgba(61,26,26,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(61,26,26,0.04)_1px,transparent_1px)] [background-size:48px_48px] py-12 px-5 md:px-10">
 <div class="max-w-[1400px] mx-auto">
-  <h2 class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] font-playfair text-[clamp(2.5rem,7vw,6rem)] leading-[0.95] tracking-[-0.02em] mb-14 text-burgundy">Education &amp;<br><em class="font-fraunces italic font-normal">Credentials.</em></h2>
+  <h2 class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] font-playfair text-[clamp(2.5rem,7vw,6rem)] leading-[0.95] tracking-[-0.02em] mb-14 text-burgundy">Education &amp;<br><em class="font-fraunces italic font-normal text-burgundy">Credentials.</em></h2>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
     <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] bg-burgundy text-cream p-8 rounded-md shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-[rgba(240,232,216,0.12)] transition-transform hover:-translate-y-[5px]">
       <div class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-tan mb-3">Graduating 2027</div>
@@ -487,9 +494,9 @@ function launchSite(){
       el.style.opacity='1';
     });
     startReveal();
-  },900);
+  },1100); // Matched smoothly with updated transition values
 }
-setTimeout(launchSite,2000);
+setTimeout(launchSite,2200);
 
 function startReveal(){
   const obs=new IntersectionObserver(entries=>{
