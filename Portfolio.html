@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rideema Singh — Portfolio 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Fraunces:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@300;400&family=Caveat:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        burgundy: '#3d1a1a',
+        burgundymid: '#5c2a2a',
+        cream: '#f0e8d8',
+        cream2: '#e8dcc8',
+        rose: '#8a4545',
+        tan: '#c8a87a',
+        cherry: '#9e3a3a',
+      },
+      fontFamily: {
+        garamond: ["'Cormorant Garamond'", 'Georgia', 'serif'],
+        fraunces: ["'Fraunces'", 'serif'],
+        mono: ["'JetBrains Mono'", 'monospace'],
+        caveat: ["'Caveat'", 'cursive'],
+        playfair: ["'Playfair Display'", 'serif'],
+      },
+      keyframes: {
+        iSlide: { to: { transform: 'translateY(0)' } },
+        navDrop: { to: { transform: 'translateY(0)' } },
+        dotPulse: { '0%,100%': { opacity: 1 }, '50%': { opacity: 0.3 } },
+        heroIn: { to: { opacity: 1, transform: 'translateY(0)' } },
+        floatY: { '0%,100%': { transform: 'translateY(0) rotate(var(--r,0deg))' }, '50%': { transform: 'translateY(-10px) rotate(var(--r,0deg))' } },
+      },
+      animation: {
+        iSlide: 'iSlide 0.85s cubic-bezier(0.22,1,0.36,1) forwards',
+        navDrop: 'navDrop 0.9s cubic-bezier(0.22,1,0.36,1) forwards',
+        dotPulse: 'dotPulse 2s ease-in-out infinite',
+        heroIn: 'heroIn 0.9s cubic-bezier(0.22,1,0.36,1) forwards',
+        floatY: 'floatY 7s ease-in-out infinite',
+      },
+    },
+  },
+}
+</script>
+</head>
+<body class="bg-burgundy text-cream font-garamond overflow-x-hidden relative">
+
+<div class="pointer-events-none fixed inset-0 z-[200] opacity-[0.04] mix-blend-overlay" style="background-image:url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;)"></div>
+
+<div id="intro-overlay" class="fixed inset-0 z-[2000] flex flex-col items-center justify-center overflow-hidden pointer-events-none">
+  <div id="ip-top" class="absolute left-0 right-0 top-0 h-1/2 bg-burgundy transition-transform duration-[850ms] ease-[cubic-bezier(0.76,0,0.24,1)]"></div>
+  <div id="ip-bot" class="absolute left-0 right-0 bottom-0 h-1/2 bg-burgundy transition-transform duration-[850ms] ease-[cubic-bezier(0.76,0,0.24,1)]"></div>
+  <div class="relative z-[5] flex flex-col items-center">
+    <div class="overflow-hidden my-[0.05rem]">
+      <span class="block translate-y-[110%] font-playfair text-[clamp(2.5rem,8vw,8rem)] tracking-[-0.02em] text-cream animate-iSlide [animation-delay:0.1s]">Rideema Singh</span>
+    </div>
+    <div class="overflow-hidden my-[0.05rem]">
+      <span class="block translate-y-[110%] font-fraunces italic text-[clamp(2rem,6vw,6rem)] text-tan animate-iSlide [animation-delay:0.28s]">Portfolio ’26</span>
+    </div>
+  </div>
+</div>
+
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-[100] h-16 flex items-center justify-between px-6 md:px-10 bg-[rgba(61,26,26,0.65)] backdrop-blur-[18px] border-b border-[rgba(240,232,216,0.08)]">
+  <a href="#hero" class="font-playfair text-xl text-cream tracking-wide">
+    Rideema.</span>
+  </a>
+
+  <ul class="hidden md:flex items-center gap-8 list-none m-0 p-0">
+    <li>
+      <a href="#about" class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-[rgba(240,232,216,0.65)] no-underline hover:text-cream transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-cream after:transition-all hover:after:w-full">
+        About
+      </a>
+    </li>
+    <li>
+      <a href="#experience" class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-[rgba(240,232,216,0.65)] no-underline hover:text-cream transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-cream after:transition-all hover:after:w-full">
+        Experience
+      </a>
+    </li>
+    <li>
+      <a href="#work" class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-[rgba(240,232,216,0.65)] no-underline hover:text-cream transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-cream after:transition-all hover:after:w-full">
+        Projects
+      </a>
+    </li>
+    <li>
+      <a href="#stack" class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-[rgba(240,232,216,0.65)] no-underline hover:text-cream transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-cream after:transition-all hover:after:w-full">
+        Tech Stack
+      </a>
+    </li>
+  </ul>
+
+  <a href="#contact" class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-cream no-underline border border-[rgba(240,232,216,0.35)] px-4 py-2 rounded-full flex items-center gap-2 bg-transparent hover:bg-cream hover:text-burgundy transition-all group duration-300">
+    <span class="w-1.5 h-1.5 bg-tan rounded-full animate-[pulse_2s_ease-in-out_infinite] group-hover:bg-burgundy"></span>
+    Contact Me
+  </a>
+</nav>
+
+<section id="hero" class="min-h-screen flex flex-col justify-center px-5 md:px-10 pt-24 pb-12 relative overflow-hidden bg-burgundy [background-image:radial-gradient(circle,rgba(240,232,216,0.10)_1.5px,transparent_2px)] [background-size:28px_28px]">
+  <h1 id="hero-title" class="opacity-0 translate-y-[30px] font-playfair text-[clamp(3.5rem,12vw,11rem)] leading-[0.92] text-cream text-center max-w-[1400px] mx-auto tracking-[-0.02em]">Rideema Singh</h1>
+  <div id="hero-sub" class="opacity-0 translate-y-[30px] font-mono text-[clamp(0.55rem,1.5vw,0.75rem)] uppercase tracking-[0.5em] text-[rgba(240,232,216,0.55)] text-center mt-6">P &middot; O &middot; R &middot; T &middot; F &middot; O &middot; L &middot; I &middot; O</div>
+  <p id="hero-tag" class="opacity-0 translate-y-[30px] font-fraunces italic text-[clamp(1rem,2.2vw,1.5rem)] text-[rgba(240,232,216,0.8)] text-center max-w-[580px] mx-auto mt-8 leading-[1.5]">Frontend developer &middot; MERN engineer &middot; creative mind crafting interfaces that feel like cinema.</p>
+  <div id="hero-ctas" class="opacity-0 translate-y-[30px] flex justify-center gap-4 flex-wrap mt-12">
+    <a href="#work" class="font-mono text-[0.65rem] uppercase tracking-[0.25em] text-burgundy bg-cream px-8 py-[0.85rem] rounded-full no-underline transition-transform hover:scale-[1.04] hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)]">View Work &darr;</a>
+    <a href="#contact" class="font-mono text-[0.65rem] uppercase tracking-[0.25em] text-cream bg-transparent px-8 py-[0.85rem] rounded-full border border-[rgba(240,232,216,0.35)] no-underline transition-colors hover:bg-[rgba(240,232,216,0.1)]">Get in touch &rarr;</a>
+  </div>
+  <svg id="hero-star-1" class="absolute text-tan opacity-0 animate-floatY w-[60px] h-[60px] left-[3%] top-[35%]" style="--r:-15deg" viewBox="0 0 60 60"><path d="M30 5 L34 26 L55 30 L34 34 L30 55 L26 34 L5 30 L26 26 Z" fill="currentColor"/></svg>
+  <svg id="hero-star-2" class="absolute text-rose opacity-0 animate-floatY w-[22px] h-[22px] right-[18%] top-[28%]" viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="currentColor" stroke-width="4"/><line x1="30" y1="8" x2="30" y2="52" stroke="currentColor" stroke-width="3"/><line x1="8" y1="30" x2="52" y2="30" stroke="currentColor" stroke-width="3"/></svg>
+</section>
+
+<section id="about" class="bg-cream2 text-burgundy [background-image:linear-gradient(rgba(61,26,26,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(61,26,26,0.04)_1px,transparent_1px)] [background-size:48px_48px] py-12 px-5 md:px-10">
+<div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
+  <div>
+    <h2 class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] font-playfair text-[clamp(2.5rem,6vw,5rem)] leading-[1.0] text-burgundy mt-4 mb-4">A little bit<br><em class="font-fraunces italic font-normal">about me.</em></h2>
+    <p class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.35s] font-garamond text-xl leading-[1.7] text-burgundy max-w-[600px]">I&#8217;m a Computer Science undergrad obsessed with the millisecond between intent and feedback &#8212; where typography, motion, and code conspire to make a product feel alive.</p>
+    <p class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.45s] font-garamond text-[1.15rem] leading-[1.7] text-[rgba(61,26,26,0.82)] mt-6 max-w-[600px]">Apart from academics and marketing, I enjoy dancing, travelling, event planning, and cooking &#8212; practices that keep me creative, organized, and adaptable. Strong interest in social media trends, content creation, branding, and creative storytelling.</p>
+  </div>
+
+  <div class="reveal opacity-0 translate-x-[60px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.25s] flex justify-center items-center">
+    <div class="flex flex-col items-center relative w-full">
+      <div class="w-5 h-[100px] rounded-sm shadow-[2px_4px_10px_rgba(0,0,0,0.15)] relative z-10" style="background:linear-gradient(90deg,#5c2a2a,#3d1a1a 50%,#5c2a2a)"></div>
+      <div class="w-8 h-6 rounded [background:linear-gradient(135deg,#ccc,#888)] -mt-1 relative z-[11] shadow-[0_3px_6px_rgba(0,0,0,0.16)] flex flex-col items-center justify-center">
+        <div class="w-[14px] h-1.5 bg-[#444] rounded-[1px] mt-1.5"></div>
+      </div>
+      <div class="bg-white text-[#3d1a1a] pt-[1.6rem] px-6 pb-5 rounded-2xl shadow-[0_25px_60px_rgba(61,26,26,0.2)] w-[300px] border border-[rgba(61,26,26,0.08)] text-center relative z-[5] -mt-1.5 rotate-1 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:rotate-0 hover:scale-[1.02]">
+        <div class="w-12 h-2 bg-[#222] rounded-full mx-auto mb-5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]"></div>
+        <div class="w-full h-[240px] bg-[#faf8f5] border border-[rgba(61,26,26,0.12)] rounded-md mb-5 flex items-center justify-center overflow-hidden shadow-[inset_0_2px_8px_rgba(0,0,0,0.03)]">
+          <span class="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-[rgba(61,26,26,0.4)]"><img src="me.jpeg" alt="Your Photo" class="w-full h-full object-cover"></span>
+        </div>
+        <div class="text-left bg-[rgba(61,26,26,0.02)] px-4 py-[0.85rem] rounded-md border-l-[3px] border-tan">
+          <h3 class="font-playfair text-2xl text-[#3d1a1a] mb-2 font-bold">Rideema Singh</h3>
+          <p class="font-mono text-[0.7rem] text-[rgba(61,26,26,0.75)] mb-1 flex items-center"><strong class="text-[#3d1a1a] uppercase text-[0.6rem] tracking-[0.1em] w-[55px] inline-block">DOB</strong>14 / 10 / 2004</p>
+          <p class="font-mono text-[0.7rem] text-[rgba(61,26,26,0.75)] mb-1 flex items-center"><strong class="text-[#3d1a1a] uppercase text-[0.6rem] tracking-[0.1em] w-[55px] inline-block">Age</strong>21 Years</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="experience" class="bg-burgundy [background-image:radial-gradient(circle,rgba(240,232,216,0.06)_1.5px,transparent_2px)] [background-size:24px_24px] py-12 px-5 md:px-10 border-b border-[rgba(240,232,216,0.05)]">
+  <div class="max-w-[1100px] mx-auto">
+    <h2 class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] font-playfair text-[clamp(2.5rem,6vw,4.5rem)] leading-none text-cream tracking-tight mb-8">
+      Work <span class="text-tan">&amp; </span><em class="font-fraunces italic font-normal">Experience</em>
+    </h2>
+
+    <div class="space-y-4">
+      
+      <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.2s] flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[rgba(240,232,216,0.1)] pb-4">
+        <div>
+          <h3 class="font-playfair text-2xl font-bold text-cream">Frontend Developer</h3>
+          <p class="font-mono text-[0.78rem] tracking-wider text-tan font-normal mt-1">CodeWave Solution &bull; Remote</p>
+          <p class="font-garamond text-[1.15rem] leading-[1.6] mt-2 max-w-[680px] text-[rgba(240,232,216,0.9)]">
+            Engineered scalable UI layers using React.js and Tailwind CSS, increasing user engagement by 30% through modular systems and crisp backend APIs.
+          </p>
+        </div>
+        <span class="font-mono text-[0.7rem] uppercase tracking-widest text-[rgba(240,232,216,0.55)] whitespace-nowrap shrink-0 sm:text-right">
+          01/2026 — 06/2026
+        </span>
+      </div>
+
+      <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.25s] flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[rgba(240,232,216,0.1)] pb-4">
+        <div>
+          <h3 class="font-playfair text-2xl font-bold text-cream">Vocational Training</h3>
+          <p class="font-mono text-[0.78rem] tracking-wider text-tan font-normal mt-1">Ordnance Factory Khamaria &bull; Jabalpur</p>
+          <p class="font-garamond text-[1.15rem] leading-[1.6] mt-2 max-w-[680px] text-[rgba(240,232,216,0.9)]">
+            Completed technical development tracks covering Advanced Excel data modeling, Cybersecurity frameworks, UTM controls, and enterprise operations.
+          </p>
+        </div>
+        <span class="font-mono text-[0.7rem] uppercase tracking-widest text-[rgba(240,232,216,0.55)] whitespace-nowrap shrink-0 sm:text-right">
+          04/2026 — 05/2026
+        </span>
+      </div>
+
+      <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.3s] flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 pb-2">
+        <div>
+          <h3 class="font-playfair text-2xl font-bold text-cream">Research Intern</h3>
+          <p class="font-mono text-[0.78rem] tracking-wider text-tan font-normal mt-1">MANIT &bull; Bhopal</p>
+          <p class="font-garamond text-[1.15rem] leading-[1.6] mt-2 max-w-[680px] text-[rgba(240,232,216,0.9)]">
+            Analyzed software complexities, explored advanced algorithmic designs, and mapped system computing parameters under senior academic leadership.
+          </p>
+        </div>
+        <span class="font-mono text-[0.7rem] uppercase tracking-widest text-[rgba(240,232,216,0.55)] whitespace-nowrap shrink-0 sm:text-right">
+          Mid 2026
+        </span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="stack" class="bg-cream2 text-burgundy [background-image:linear-gradient(rgba(61,26,26,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(61,26,26,0.04)_1px,transparent_1px)] [background-size:48px_48px] py-12 px-5 md:px-10">
+<div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+  <div>
+    <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.05s] font-mono text-[0.6rem] uppercase tracking-[0.3em] text-[rgba(61,26,26,0.4)] mb-4">04 &#8212; Stack</div>
+    <h2 class="font-playfair text-[clamp(3rem,7vw,5.5rem)] leading-[0.95] tracking-[-0.02em] text-burgundy">What&#8217;s In<br><em class="font-fraunces italic font-normal">my bag.</em></h2>
+    <p class="font-garamond text-[1.1rem] leading-[1.8] mt-8 max-w-[420px] text-[rgba(61,26,26,0.75)]">A fine balance between logic and expression. My core technical proficiency centers within contemporary frontend paradigms and complete MERN stack engineering, accented by robust professional leadership, event execution architecture, and creative graphic direction.</p>
+  </div>
+  
+  <div class="reveal opacity-0 translate-x-[60px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] flex justify-center">
+    <div id="skills-radial" class="relative w-[560px] h-[520px] max-w-full">
+      
+      <div id="skills-center-img" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-[250px] h-[280px]">
+        <img src="stack.png" alt="Toolkit Graphic" class="w-full h-full object-contain">
+      </div>
+      
+      <svg id="skills-svg" class="absolute top-0 left-0 w-full h-full pointer-events-none z-[5] overflow-visible" viewBox="0 0 560 520"></svg>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="work" class="bg-burgundy [background-image:radial-gradient(circle,rgba(240,232,216,0.10)_1.5px,transparent_2px)] [background-size:30px_30px] py-10 px-5 md:px-10">
+<div class="max-w-[1400px] mx-auto">
+  <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.05s] font-mono text-[0.6rem] uppercase tracking-[0.3em] text-[rgba(240,232,216,0.4)] mb-4">05 — Selected Projects</div>
+  
+  <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] h-[140px] relative overflow-hidden rounded-lg mb-12" style="background:repeating-linear-gradient(90deg, #e8dcc8 0 60px, #c8a87a 60px 120px, #e8dcc8 120px 180px, #2b1212 180px 230px, #f0e8d8 230px 290px)">
+    <div class="absolute left-8 top-1/2 -translate-y-1/2">
+      <div class="inline-block bg-[rgba(240,232,216,0.95)] text-burgundy font-playfair text-[clamp(1.5rem,3.5vw,2.5rem)] px-6 py-2 shadow-[0_4px_15px_rgba(0,0,0,0.15)] -rotate-1 tracking-wide">
+        Live Deployments
+      </div>
+    </div>
+  </div>
+  
+  <p class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.25s] font-fraunces italic text-lg text-[rgba(240,232,216,0.75)] max-w-[480px] mb-8">Functional software assets built from scratch, end-to-end.</p>
+  
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-4">
+
+    <a href="https://dev-drop-gamma.vercel.app" target="_blank" class="group reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] relative bg-cream text-burgundy p-7 rounded-md shadow-[0_12px_40px_rgba(0,0,0,0.25)] no-underline block hover:!rotate-0 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3)] rotate-[-1.5deg] duration-500">
+      <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 -rotate-3 w-20 h-6 bg-[rgba(200,168,122,0.75)] shadow-[0_2px_6px_rgba(0,0,0,0.15)]"></div>
+      <div class="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-[rgba(61,26,26,0.5)]">01 &middot; Marketplace</div>
+      <h3 class="font-playfair text-[clamp(1.6rem,3vw,2.4rem)] leading-[1.05] text-burgundy mt-3">DevDrop</h3>
+      <p class="font-garamond text-base leading-[1.65] text-[rgba(61,26,26,0.75)] mt-4">Full-stack web template marketplace asset. Leverages granular MongoDB database schemas for secure relational document lookup, backend authentication APIs, and CRUD modules.</p>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <span class="font-mono text-[0.55rem] uppercase tracking-[0.15em] text-[rgba(61,26,26,0.6)] border border-[rgba(61,26,26,0.2)] px-[0.6rem] py-1 rounded-full">React.js</span>
+        <span class="font-mono text-[0.55rem] uppercase tracking-[0.15em] text-[rgba(61,26,26,0.6)] border border-[rgba(61,26,26,0.2)] px-[0.6rem] py-1 rounded-full">Node.js</span>
+        <span class="font-mono text-[0.55rem] uppercase tracking-[0.15em] text-[rgba(61,26,26,0.6)] border border-[rgba(61,26,26,0.2)] px-[0.6rem] py-1 rounded-full">MongoDB</span>
+        <span class="font-mono text-[0.55rem] uppercase tracking-[0.15em] text-[rgba(61,26,26,0.6)] border border-[rgba(61,26,26,0.2)] px-[0.6rem] py-1 rounded-full">Express.js</span>
+      </div>
+      <div class="flex justify-between items-center mt-6 font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[rgba(61,26,26,0.55)]">
+        <span>Visit live</span>
+        <div class="w-9 h-9 border border-[rgba(61,26,26,0.3)] rounded-full flex items-center justify-center text-base text-burgundy transition-all group-hover:bg-burgundy group-hover:text-cream group-hover:rotate-45">&#8599;</div>
+      </div>
+    </a>
+
+    <a href="http://www.codewavesolution.in/" target="_blank" class="group reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.25s] relative bg-cream text-burgundy p-7 rounded-md shadow-[0_12px_40px_rgba(0,0,0,0.25)] no-underline block hover:!rotate-0 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3)] rotate-1 duration-500">
+      <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 -rotate-3 w-20 h-6 bg-[rgba(200,168,122,0.75)] shadow-[0_2px_6px_rgba(0,0,0,0.15)]"></div>
+      <div class="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-[rgba(61,26,26,0.5)]">02 &middot; Edtech Platform</div>
+      <h3 class="font-playfair text-[clamp(1.6rem,3vw,2.4rem)] leading-[1.05] text-burgundy mt-3">CodeWave Solution</h3>
+      <p class="font-garamond text-base leading-[1.65] text-[rgba(61,26,26,0.75)] mt-4">Scalable MERN-stack environment supporting interactive coding tracks. Designed with high-performance responsive interfaces via Tailwind configurations and custom REST architecture endpoints.</p>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <span class="font-mono text-[0.55rem] uppercase tracking-[0.15em] text-[rgba(61,26,26,0.6)] border border-[rgba(61,26,26,0.2)] px-[0.6rem] py-1 rounded-full">React.js</span>
+        <span class="font-mono text-[0.55rem] uppercase tracking-[0.15em] text-[rgba(61,26,26,0.6)] border border-[rgba(61,26,26,0.2)] px-[0.6rem] py-1 rounded-full">Tailwind CSS</span>
+        <span class="font-mono text-[0.55rem] uppercase tracking-[0.15em] text-[rgba(61,26,26,0.6)] border border-[rgba(61,26,26,0.2)] px-[0.6rem] py-1 rounded-full">Express.js</span>
+        <span class="font-mono text-[0.55rem] uppercase tracking-[0.15em] text-[rgba(61,26,26,0.6)] border border-[rgba(61,26,26,0.2)] px-[0.6rem] py-1 rounded-full">MongoDB</span>
+      </div>
+      <div class="flex justify-between items-center mt-6 font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[rgba(61,26,26,0.55)]">
+        <span>Visit live</span>
+        <div class="w-9 h-9 border border-[rgba(61,26,26,0.3)] rounded-full flex items-center justify-center text-base text-burgundy transition-all group-hover:bg-burgundy group-hover:text-cream group-hover:rotate-45">&#8599;</div>
+      </div>
+    </a>
+
+    <a href="https://instant-errands.vercel.app" target="_blank" class="group reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.35s] relative bg-cream text-burgundy p-7 rounded-md shadow-[0_12px_40px_rgba(0,0,0,0.25)] no-underline block hover:!rotate-0 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3)] rotate-[-0.5deg] duration-500">
+      <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 -rotate-3 w-20 h-6 bg-[rgba(200,168,122,0.75)] shadow-[0_2px_6px_rgba(0,0,0,0.15)]"></div>
+      <div class="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-[rgba(61,26,26,0.5)]">03 &middot; On-Demand Services</div>
+      <h3 class="font-playfair text-[clamp(1.6rem,3vw,2.4rem)] leading-[1.05] text-burgundy mt-3">Quick Serve</h3>
+      <p class="font-garamond text-base leading-[1.65] text-[rgba(61,26,26,0.75)] mt-4">An instant booking service portal pairing home service professionals within a 30-60 minute window. Built clean using React + Vite on a lightweight asynchronous server architecture.</p>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <span class="font-mono text-[0.55rem] uppercase tracking-[0.15em] text-[rgba(61,26,26,0.6)] border border-[rgba(61,26,26,0.2)] px-[0.6rem] py-1 rounded-full">React</span>
+        <span class="font-mono text-[0.55rem] uppercase tracking-[0.15em] text-[rgba(61,26,26,0.6)] border border-[rgba(61,26,26,0.2)] px-[0.6rem] py-1 rounded-full">Vite</span>
+        <span class="font-mono text-[0.55rem] uppercase tracking-[0.15em] text-[rgba(61,26,26,0.6)] border border-[rgba(61,26,26,0.2)] px-[0.6rem] py-1 rounded-full">Express.js</span>
+        <span class="font-mono text-[0.55rem] uppercase tracking-[0.15em] text-[rgba(61,26,26,0.6)] border border-[rgba(61,26,26,0.2)] px-[0.6rem] py-1 rounded-full">MongoDB</span>
+      </div>
+      <div class="flex justify-between items-center mt-6 font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[rgba(61,26,26,0.55)]">
+        <span>Visit live</span>
+        <div class="w-9 h-9 border border-[rgba(61,26,26,0.3)] rounded-full flex items-center justify-center text-base text-burgundy transition-all group-hover:bg-burgundy group-hover:text-cream group-hover:rotate-45">&#8599;</div>
+      </div>
+    </a>
+
+  </div>
+</div>
+</section>
+
+<section id="education" class="bg-cream2 text-burgundy [background-image:linear-gradient(rgba(61,26,26,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(61,26,26,0.04)_1px,transparent_1px)] [background-size:48px_48px] py-12 px-5 md:px-10">
+<div class="max-w-[1400px] mx-auto">
+  <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.05s] font-mono text-[0.6rem] uppercase tracking-[0.3em] text-[rgba(61,26,26,0.4)] mb-4">06 — Academic Journey</div>
+  <h2 class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] font-playfair text-[clamp(2.5rem,7vw,6rem)] leading-[0.95] tracking-[-0.02em] mb-14 text-burgundy">Education &amp;<br><em class="font-fraunces italic font-normal">Credentials.</em></h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+    <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] bg-burgundy text-cream p-8 rounded-md shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-[rgba(240,232,216,0.12)] transition-transform hover:-translate-y-[5px]">
+      <div class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-tan mb-3">Graduating 2027</div>
+      <h3 class="font-playfair text-2xl leading-[1.2] mb-2">B.Tech in Computer Science</h3>
+      <div class="font-fraunces italic text-lg text-[rgba(240,232,216,0.8)] mb-4">Gyan Ganga Institute of Technology and Sciences</div>
+      <div class="inline-block bg-[rgba(240,232,216,0.15)] text-cream font-mono text-[0.6rem] px-[0.8rem] py-[0.3rem] rounded-full tracking-[0.1em]">Cumulative CGPA: 8.33</div>
+    </div>
+    <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.25s] bg-burgundy text-cream p-8 rounded-md shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-[rgba(240,232,216,0.12)] transition-transform hover:-translate-y-[5px]">
+      <div class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-tan mb-3">CBSE Board Certification</div>
+      <h3 class="font-playfair text-2xl leading-[1.2] mb-2">Higher Secondary Education</h3>
+      <div class="font-fraunces italic text-lg text-[rgba(240,232,216,0.8)] mb-4">Christ Church Girls Senior Secondary School</div>
+      <div class="inline-block bg-[rgba(240,232,216,0.15)] text-cream font-mono text-[0.6rem] px-[0.8rem] py-[0.3rem] rounded-full tracking-[0.1em]">10th Grade: 93% &nbsp;&middot;&nbsp; 12th Grade: 87%</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="certifications" class="bg-burgundy [background-image:radial-gradient(circle,rgba(240,232,216,0.10)_1.5px,transparent_2px)] [background-size:28px_28px] py-12 px-5 md:px-10">
+<div class="max-w-[1400px] mx-auto">
+  <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.05s] font-mono text-[0.6rem] uppercase tracking-[0.3em] text-[rgba(240,232,216,0.4)] mb-4">07 — Technical Validation</div>
+  <h2 class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] font-playfair text-[clamp(2.5rem,6vw,4.5rem)] text-cream">Certifications.</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
+    <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] bg-cream text-burgundy p-6 rounded-md shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all -rotate-1 hover:rotate-0 hover:scale-[1.03] hover:shadow-[0_16px_50px_rgba(0,0,0,0.3)]">
+      <div class="font-playfair text-xl">Cisco Networks</div>
+      <p class="font-garamond text-sm leading-[1.6] text-[rgba(61,26,26,0.72)] mt-2">C++ Essentials, Core C, Python, Web Architecture (HTML/CSS/JS), Data Analysis, &amp; AI Frameworks.</p>
+    </div>
+    <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.25s] bg-cream text-burgundy p-6 rounded-md shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all rotate-1 hover:rotate-0 hover:scale-[1.03] hover:shadow-[0_16px_50px_rgba(0,0,0,0.3)]">
+      <div class="font-playfair text-xl">Google Cloud</div>
+      <p class="font-garamond text-sm leading-[1.6] text-[rgba(61,26,26,0.72)] mt-2">Earned 15 official Google Developer Group course badges paired with an Arcade Cloud milestone completion.</p>
+    </div>
+    <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.35s] bg-cream text-burgundy p-6 rounded-md shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all -rotate-1 hover:rotate-0 hover:scale-[1.03] hover:shadow-[0_16px_50px_rgba(0,0,0,0.3)]">
+      <div class="font-playfair text-xl">AWS Foundations</div>
+      <p class="font-garamond text-sm leading-[1.6] text-[rgba(61,26,26,0.72)] mt-2">AWS Cloud Foundation validation detailing modern distributed cloud architectures and global instances.</p>
+    </div>
+    <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.45s] bg-cream text-burgundy p-6 rounded-md shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all rotate-1 hover:rotate-0 hover:scale-[1.03] hover:shadow-[0_16px_50px_rgba(0,0,0,0.3)]">
+      <div class="font-playfair text-xl">TCS Core Skills</div>
+      <p class="font-garamond text-sm leading-[1.6] text-[rgba(61,26,26,0.72)] mt-2">TCS Professional Soft Skill Certification confirming public relations, negotiation, and leadership qualities.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="contact" class="bg-cream2 text-burgundy [background-image:linear-gradient(rgba(61,26,26,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(61,26,26,0.04)_1px,transparent_1px)] [background-size:48px_48px] pt-12 px-5 md:px-10 pb-8">
+<div class="max-w-[1100px] mx-auto">
+  <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.05s] font-mono text-[0.6rem] uppercase tracking-[0.3em] text-[rgba(61,26,26,0.4)] mb-4 text-center">06 — Let’s Talk</div>
+  <h2 class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] font-playfair text-[clamp(2.2rem,6vw,4.5rem)] leading-[1.05] text-burgundy tracking-[-0.01em] text-center">let’s create <em class="font-fraunces italic font-normal">something lovely.</em></h2>
+
+  <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.25s] flex flex-wrap justify-center gap-x-10 gap-y-6 mx-auto mt-10 mb-6 max-w-[900px] pb-8 border-b border-[rgba(61,26,26,0.12)]">
+    <a href="mailto:rideemasinghjbp@gmail.com" class="inline-flex items-center gap-1 no-underline text-burgundy font-mono text-[0.72rem] uppercase tracking-[0.15em] transition-all hover:text-rose hover:-translate-y-0.5">Email <span class="font-garamond normal-case font-semibold tracking-normal text-[1.05rem] ml-0.5">rideemasinghjbp@gmail.com</span> &#8599;</a>
+    <a href="tel:+918641050025" class="inline-flex items-center gap-1 no-underline text-burgundy font-mono text-[0.72rem] uppercase tracking-[0.15em] transition-all hover:text-rose hover:-translate-y-0.5">Phone <span class="font-garamond normal-case font-semibold tracking-normal text-[1.05rem] ml-0.5">+91 86410 50025</span> &#8599;</a>
+    <a href="https://www.linkedin.com/in/rideema-singh-3455472b4/" target="_blank" class="inline-flex items-center gap-1 no-underline text-burgundy font-mono text-[0.72rem] uppercase tracking-[0.15em] transition-all hover:text-rose hover:-translate-y-0.5">LinkedIn <span class="font-garamond normal-case font-semibold tracking-normal text-[1.05rem] ml-0.5">rideema-singh</span> &#8599;</a>
+    <a href="https://github.com/Rideema14" target="_blank" class="inline-flex items-center gap-1 no-underline text-burgundy font-mono text-[0.72rem] uppercase tracking-[0.15em] transition-all hover:text-rose hover:-translate-y-0.5">GitHub <span class="font-garamond normal-case font-semibold tracking-normal text-[1.05rem] ml-0.5">Rideema14</span> &#8599;</a>
+    <a href="https://leetcode.com/u/RideemaSingh" target="_blank" class="inline-flex items-center gap-1 no-underline text-burgundy font-mono text-[0.72rem] uppercase tracking-[0.15em] transition-all hover:text-rose hover:-translate-y-0.5">LeetCode <span class="font-garamond normal-case font-semibold tracking-normal text-[1.05rem] ml-0.5">RideemaSingh</span> &#8599;</a>
+  </div>
+
+  <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.35s] flex justify-between items-center pt-4 font-mono text-[0.58rem] uppercase tracking-[0.25em] text-[rgba(61,26,26,0.5)] flex-wrap gap-4">
+    <span>&copy; 2026 &middot; Rideema Singh</span>
+    <span>Bhopal, India</span>
+    <span class="font-caveat text-xl normal-case tracking-normal text-rose">thank you</span>
+  </div>
+</div>
+</section>
+
+<script>
+// ── SITE ACTIVATION & LOADING
+const overlay=document.getElementById('intro-overlay');
+const ipTop=document.getElementById('ip-top');
+const ipBot=document.getElementById('ip-bot');
+const nav=document.getElementById('main-nav');
+
+const heroEntries=['hero-title','hero-sub','hero-tag','hero-ctas'];
+const heroStars=['hero-star-1','hero-star-2'];
+
+function launchSite(){
+  ipTop.style.transform='translateY(-100%)';
+  ipBot.style.transform='translateY(100%)';
+  setTimeout(()=>{
+    overlay.style.display='none';
+    nav.classList.remove('-translate-y-full');
+    nav.classList.add('animate-navDrop');
+
+    heroEntries.forEach((id,i)=>{
+      const el=document.getElementById(id);
+      el.style.animationDelay=(i*0.1)+'s';
+      el.classList.remove('opacity-0','translate-y-[30px]');
+      el.classList.add('animate-heroIn');
+    });
+    heroStars.forEach((id,i)=>{
+      const el=document.getElementById(id);
+      el.style.animationDelay=(0.4+i*0.15)+'s';
+      el.style.opacity='1';
+    });
+    startReveal();
+  },900);
+}
+setTimeout(launchSite,2000);
+
+function startReveal(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.remove('opacity-0','translate-y-[50px]','translate-x-[60px]');
+        e.target.classList.add('opacity-100','translate-y-0','translate-x-0');
+      }
+    });
+  },{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+}
+
+// ── THE INTACT ARROWS RADIAL MATHEMATICS ENGINE ──
+(function(){
+  var container = document.getElementById('skills-radial');
+  if(!container) return;
+  var svg = document.getElementById('skills-svg');
+
+  var skills = [
+    {name:'React.js',     angle:315},
+    {name:'GitHub',       angle:0  },
+    {name:'MongoDB',      angle:50 },
+    {name:'Python',       angle:100},
+    {name:'Express.js',   angle:140},
+    {name:'Tailwind CSS', angle:210},
+    {name:'Java',         angle:250},
+    {name:'Node.js',      angle:290},
+  ];
+
+  var cW=560, cH=520;
+  var cx=cW/2, cy=cH/2;
+  var radius=Math.min(cx,cy)*1.05;
+
+  skills.forEach(function(skill, i){
+    var rad = ((skill.angle - 90) * Math.PI) / 180;
+    var lx = cx + radius * Math.cos(rad);
+    var ly = cy + radius * Math.sin(rad);
+
+    var lbl = document.createElement('div');
+    lbl.className = 'absolute z-[8] font-caveat text-2xl text-burgundy whitespace-nowrap -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-0 transition-opacity duration-500';
+    lbl.textContent = skill.name;
+    lbl.style.left = (lx / cW * 100) + '%';
+    lbl.style.top  = (ly / cH * 100) + '%';
+    container.appendChild(lbl);
+
+    var dx = cx - lx, dy = cy - ly;
+    var dist = Math.sqrt(dx*dx+dy*dy);
+    var ux = dx/dist, uy = dy/dist;
+    var sOff=56, eOff=130;
+    var sx=lx+ux*sOff, sy=ly+uy*sOff;
+    var ex=cx-ux*eOff, ey=cy-uy*eOff;
+
+    var perp = 28 * (i%2===0?1:-1);
+    var qx=(sx+ex)/2 + uy*perp;
+    var qy=(sy+ey)/2 - ux*perp;
+
+    var path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('stroke','#3d1a1a');
+    path.setAttribute('stroke-width','1.8');
+    path.setAttribute('fill','none');
+    path.setAttribute('stroke-linecap','round');
+    path.style.opacity='0.65';
+    path.style.strokeDasharray='220';
+    path.style.strokeDashoffset='220';
+    path.style.transition='stroke-dashoffset 1s cubic-bezier(0.22,1,0.36,1)';
+    path.setAttribute('d','M'+sx.toFixed(1)+' '+sy.toFixed(1)+' Q'+qx.toFixed(1)+' '+qy.toFixed(1)+' '+ex.toFixed(1)+' '+ey.toFixed(1));
+    path.style.transitionDelay = (0.1 + i*0.1)+'s';
+    svg.appendChild(path);
+
+    var ha = Math.atan2(ey-qy, ex-qx);
+    var p1x=ex-10*Math.cos(ha-0.45), p1y=ey-10*Math.sin(ha-0.45);
+    var p2x=ex-10*Math.cos(ha+0.45), p2y=ey-10*Math.sin(ha+0.45);
+    var head = document.createElementNS('http://www.w3.org/2000/svg','path');
+    head.setAttribute('stroke','#3d1a1a');
+    head.setAttribute('stroke-width','1.8');
+    head.setAttribute('fill','none');
+    head.setAttribute('stroke-linecap','round');
+    head.style.opacity='0';
+    head.style.transition='opacity 0.3s ease';
+    head.setAttribute('d','M'+p1x.toFixed(1)+' '+p1y.toFixed(1)+' L'+ex.toFixed(1)+' '+ey.toFixed(1)+' L'+p2x.toFixed(1)+' '+p2y.toFixed(1));
+    head.style.transitionDelay = (0.9 + i*0.1)+'s';
+    svg.appendChild(head);
+
+    lbl._path=path; lbl._head=head;
+  });
+
+  var done=false;
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting && !done){
+        done=true;
+        setTimeout(function(){
+          var labels=Array.prototype.filter.call(container.children,function(c){return c.tagName==='DIV' && c.id!=='skills-center-img';});
+          labels.forEach(function(el,i){
+            setTimeout(function(){ el.style.opacity='1'; },i*70);
+          });
+          var allPaths=svg.querySelectorAll('path');
+          allPaths.forEach(function(p){ p.style.strokeDashoffset='0'; });
+          setTimeout(function(){
+            allPaths.forEach(function(p){ p.style.opacity='0.65'; });
+          },900);
+        },200);
+      }
+    });
+  },{threshold:0.25});
+  obs.observe(container);
+})();
+
+// ── SYNCED NAVBAR SECTIONS
+const sections=document.querySelectorAll('section[id]');
+const navAs=document.querySelectorAll('#main-nav ul a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-100)cur=s.id;});
+  navAs.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+cur?'#f0e8d8':'';});
+},{passive:true});
+</script>
+</body>
+</html>
