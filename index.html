@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Rideema Singh — Portfolio 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,9 +29,9 @@ tailwind.config = {
         playfair: ["'Playfair Display'", 'serif'],
       },
       keyframes: {
-        iSlide: { 
+        iSlide: {
           '0%': { transform: 'translateY(110%)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' } 
+          '100%': { transform: 'translateY(0)', opacity: '1' }
         },
         floatY: { '0%,100%': { transform: 'translateY(0) rotate(var(--r,0deg))' }, '50%': { transform: 'translateY(-10px) rotate(var(--r,0deg))' } },
       },
@@ -43,26 +43,57 @@ tailwind.config = {
   },
 }
 </script>
+<style>
+  /*
+    THE FIX:
+    1. `overflow-x: hidden` alone on <body> doesn't stop horizontal scroll
+       caused by descendants that overflow the viewport (like the nav's
+       flex row on narrow screens, or absolutely-positioned star SVGs
+       using left/right percentages against a min-width parent).
+       We lock it on <html> AND <body>, and add `max-width: 100%` /
+       `width: 100%` guards so nothing can push the viewport wider.
+    2. Because <body>'s dotted background is what scrolls away when this
+       happens, fixing the overflow source fixes the "missing background"
+       symptom too — it was never missing, the page was just scrolled
+       past it horizontally.
+    3. Nav: on small screens the menu list is hidden, but the remaining
+       flex row (logo + contact pill + burger) still needs room to
+       breathe — we let the logo/contact text shrink and the row wrap
+       into fixed 64px height without ever exceeding 100vw.
+  */
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* keep the contact pill from forcing overflow on small/narrow phones */
+  @media (max-width: 380px) {
+    #nav-contact-text { display: none; }
+    #nav-contact-btn { padding-left: 0.75rem; padding-right: 0.75rem; }
+  }
+</style>
 </head>
-<body class="bg-burgundy text-cream font-garamond overflow-x-hidden relative">
+<body class="bg-burgundy text-cream font-garamond relative w-full overflow-x-hidden">
 
 <div class="pointer-events-none fixed inset-0 z-[200] opacity-[0.04] mix-blend-overlay" style="background-image:url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;)"></div>
 
 <div id="intro-overlay" class="fixed inset-0 z-[2000] flex flex-col items-center justify-center overflow-hidden pointer-events-none transition-all duration-[1200ms] cubic-bezier(0.25, 1, 0.5, 1)">
   <div id="ip-top" class="absolute left-0 right-0 top-0 h-1/2 bg-burgundy transition-transform duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)]"></div>
   <div id="ip-bot" class="absolute left-0 right-0 bottom-0 h-1/2 bg-burgundy transition-transform duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)]"></div>
-  <div id="intro-text-wrapper" class="relative z-[5] flex flex-col items-center transition-all duration-[1000ms] ease-[cubic-bezier(0.25,1,0.5,1)]">
+  <div id="intro-text-wrapper" class="relative z-[5] flex flex-col items-center transition-all duration-[1000ms] ease-[cubic-bezier(0.25,1,0.5,1)] px-4 text-center">
     <div class="overflow-hidden my-[0.05rem]">
-      <span class="block opacity-0 translate-y-[110%] font-playfair text-[clamp(2.5rem,8vw,8rem)] tracking-[-0.02em] text-cream animate-iSlide [animation-delay:0.15s]">Rideema Singh</span>
+      <span class="block opacity-0 translate-y-[110%] font-playfair text-[clamp(2rem,10vw,8rem)] tracking-[-0.02em] text-cream animate-iSlide [animation-delay:0.15s]">Rideema Singh</span>
     </div>
     <div class="overflow-hidden my-[0.05rem]">
-      <span class="block opacity-0 translate-y-[110%] font-fraunces italic text-[clamp(2rem,6vw,6rem)] text-tan animate-iSlide [animation-delay:0.35s]">Portfolio ’26</span>
+      <span class="block opacity-0 translate-y-[110%] font-fraunces italic text-[clamp(1.5rem,7vw,6rem)] text-tan animate-iSlide [animation-delay:0.35s]">Portfolio '26</span>
     </div>
   </div>
 </div>
 
-<nav id="main-nav" class="fixed top-0 left-0 right-0 z-[100] h-16 flex items-center justify-between px-6 md:px-10 bg-[rgba(61,26,26,0.65)] backdrop-blur-[18px] border-b border-[rgba(240,232,216,0.08)] opacity-0 -translate-y-4 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)]">
-  <a href="#hero" class="font-playfair text-xl text-cream tracking-wide">
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-[100] h-16 flex items-center justify-between px-4 sm:px-6 md:px-10 bg-[rgba(61,26,26,0.65)] backdrop-blur-[18px] border-b border-[rgba(240,232,216,0.08)] opacity-0 -translate-y-4 transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] w-full">
+  <a href="#hero" class="font-playfair text-lg sm:text-xl text-cream tracking-wide shrink-0">
     Rideema.
   </a>
 
@@ -89,43 +120,71 @@ tailwind.config = {
     </li>
   </ul>
 
-  <a href="#contact" class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-cream no-underline border border-[rgba(240,232,216,0.35)] px-4 py-2 rounded-full flex items-center gap-2 bg-transparent hover:bg-cream hover:text-burgundy transition-all group duration-300">
-    <span class="w-1.5 h-1.5 bg-tan rounded-full animate-[pulse_2s_ease-in-out_infinite] group-hover:bg-burgundy"></span>
-    Contact Me
-  </a>
+  <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+    <a id="nav-contact-btn" href="#contact" class="hidden xs:flex sm:flex font-mono text-[0.6rem] sm:text-[0.65rem] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-cream no-underline border border-[rgba(240,232,216,0.35)] px-3 sm:px-4 py-2 rounded-full items-center gap-2 bg-transparent hover:bg-cream hover:text-burgundy transition-all group duration-300 whitespace-nowrap">
+      <span class="w-1.5 h-1.5 bg-tan rounded-full animate-[pulse_2s_ease-in-out_infinite] group-hover:bg-burgundy shrink-0"></span>
+      <span id="nav-contact-text">Contact Me</span>
+    </a>
+
+    <button id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" class="md:hidden flex flex-col justify-center items-center gap-[5px] w-9 h-9 shrink-0">
+      <span class="mm-bar block w-6 h-[2px] bg-cream transition-all duration-300"></span>
+      <span class="mm-bar block w-6 h-[2px] bg-cream transition-all duration-300"></span>
+      <span class="mm-bar block w-6 h-[2px] bg-cream transition-all duration-300"></span>
+    </button>
+  </div>
 </nav>
 
-<section id="hero" class="min-h-screen flex flex-col justify-center px-5 md:px-10 pt-24 pb-12 relative overflow-hidden bg-burgundy [background-image:radial-gradient(circle,rgba(240,232,216,0.10)_1.5px,transparent_2px)] [background-size:28px_28px]">
-  <h1 id="hero-title" class="opacity-0 translate-y-12 transition-all duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)] font-playfair text-[clamp(3.5rem,12vw,11rem)] leading-[0.92] text-cream text-center max-w-[1400px] mx-auto tracking-[-0.02em]">Rideema Singh</h1>
-  <div id="hero-sub" class="opacity-0 translate-y-8 transition-all duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)] font-mono text-[clamp(0.65rem,1.5vw,0.85rem)] uppercase tracking-[0.4em] font-bold text-[rgba(240,232,216,0.9)] text-center mt-6">S&middot;O&middot;F&middot;T&middot;W&middot;A&middot;R&middot;E&nbsp;&nbsp;D&middot;E&middot;V&middot;E&middot;L&middot;O&middot;P&middot;E&middot;R</div>
-  <p id="hero-tag" class="opacity-0 translate-y-8 transition-all duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)] font-fraunces italic text-[clamp(1rem,2.2vw,1.5rem)] text-[rgba(240,232,216,0.8)] text-center max-w-[580px] mx-auto mt-8 leading-[1.5]">Frontend developer &middot; MERN engineer &middot; creative mind crafting interfaces that feel like cinema.</p>
+<div id="mobile-menu" class="fixed top-16 left-0 right-0 z-[99] bg-[rgba(61,26,26,0.97)] backdrop-blur-[18px] border-b border-[rgba(240,232,216,0.08)] md:hidden max-h-0 overflow-hidden transition-[max-height] duration-[400ms] ease-[cubic-bezier(0.25,1,0.5,1)] w-full">
+  <ul class="flex flex-col list-none m-0 p-0 px-6 py-2">
+    <li class="border-b border-[rgba(240,232,216,0.08)]">
+      <a href="#about" class="mm-link block py-4 font-mono text-xs uppercase tracking-[0.2em] text-[rgba(240,232,216,0.8)] no-underline">About</a>
+    </li>
+    <li class="border-b border-[rgba(240,232,216,0.08)]">
+      <a href="#experience" class="mm-link block py-4 font-mono text-xs uppercase tracking-[0.2em] text-[rgba(240,232,216,0.8)] no-underline">Experience</a>
+    </li>
+    <li class="border-b border-[rgba(240,232,216,0.08)]">
+      <a href="#work" class="mm-link block py-4 font-mono text-xs uppercase tracking-[0.2em] text-[rgba(240,232,216,0.8)] no-underline">Projects</a>
+    </li>
+    <li class="border-b border-[rgba(240,232,216,0.08)]">
+      <a href="#stack" class="mm-link block py-4 font-mono text-xs uppercase tracking-[0.2em] text-[rgba(240,232,216,0.8)] no-underline">Tech Stack</a>
+    </li>
+    <li>
+      <a href="#contact" class="mm-link block py-4 font-mono text-xs uppercase tracking-[0.2em] text-tan no-underline">Contact Me</a>
+    </li>
+  </ul>
+</div>
+
+<section id="hero" class="min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-10 pt-24 pb-12 relative overflow-hidden bg-burgundy w-full [background-image:radial-gradient(circle,rgba(240,232,216,0.10)_1.5px,transparent_2px)] [background-size:28px_28px]">
+  <h1 id="hero-title" class="opacity-0 translate-y-12 transition-all duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)] font-playfair text-[clamp(2.75rem,12vw,11rem)] leading-[0.92] text-cream text-center max-w-[1400px] mx-auto tracking-[-0.02em]">Rideema Singh</h1>
+  <div id="hero-sub" class="opacity-0 translate-y-8 transition-all duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)] font-mono text-[clamp(0.55rem,1.5vw,0.85rem)] uppercase tracking-[0.3em] sm:tracking-[0.4em] font-bold text-[rgba(240,232,216,0.9)] text-center mt-6 px-2">S&middot;O&middot;F&middot;T&middot;W&middot;A&middot;R&middot;E&nbsp;&nbsp;D&middot;E&middot;V&middot;E&middot;L&middot;O&middot;P&middot;E&middot;R</div>
+  <p id="hero-tag" class="opacity-0 translate-y-8 transition-all duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)] font-fraunces italic text-[clamp(1rem,2.2vw,1.5rem)] text-[rgba(240,232,216,0.8)] text-center max-w-[580px] mx-auto mt-8 leading-[1.5] px-2">Frontend developer &middot; MERN engineer &middot; creative mind crafting interfaces that feel like cinema.</p>
   <div id="hero-ctas" class="opacity-0 translate-y-6 transition-all duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)] flex justify-center gap-4 flex-wrap mt-12">
-    <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="font-mono text-[0.95rem] uppercase tracking-[0.25em] text-burgundy bg-cream px-8 py-[0.85rem] rounded-full no-underline transition-transform hover:scale-[1.04] hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)]">View Resume</a>
-    <a href="#contact" class="font-mono text-[0.95rem] uppercase tracking-[0.25em] text-burgundy bg-tan px-8 py-[0.85rem] rounded-full border border-[rgba(240,232,216,0.35)] no-underline transition-colors hover:bg-[rgba(240,232,216,0.1)] hover:text-cream">Get in touch</a>
+    <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="font-mono text-[0.8rem] sm:text-[0.95rem] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-burgundy bg-cream px-6 sm:px-8 py-[0.75rem] sm:py-[0.85rem] rounded-full no-underline transition-transform hover:scale-[1.04] hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)]">View Resume</a>
+    <a href="#contact" class="font-mono text-[0.8rem] sm:text-[0.95rem] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-burgundy bg-tan px-6 sm:px-8 py-[0.75rem] sm:py-[0.85rem] rounded-full border border-[rgba(240,232,216,0.35)] no-underline transition-colors hover:bg-[rgba(240,232,216,0.1)] hover:text-cream">Get in touch</a>
   </div>
-  
-  <svg id="hero-star-1" class="absolute text-tan opacity-0 scale-75 transition-all duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)] animate-floatY w-[60px] h-[60px] left-[3%] top-[35%]" style="--r:-15deg" viewBox="0 0 60 60"><path d="M30 5 L34 26 L55 30 L34 34 L30 55 L26 34 L5 30 L26 26 Z" fill="currentColor"/></svg>
-  <svg id="hero-star-2" class="absolute text-tan opacity-0 scale-75 transition-all duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)] animate-floatY w-[22px] h-[22px] right-[18%] top-[28%]" viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="currentColor" stroke-width="4"/><line x1="30" y1="8" x2="30" y2="52" stroke="currentColor" stroke-width="3"/><line x1="8" y1="30" x2="52" y2="30" stroke="currentColor" stroke-width="3"/></svg>
-  <svg id="hero-star-3" class="absolute text-tan opacity-0 scale-75 transition-all duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)] animate-floatY w-[40px] h-[40px] right-[6%] top-[65%]" style="--r:20deg" viewBox="0 0 60 60"><path d="M30 5 L34 26 L55 30 L34 34 L30 55 L26 34 L5 30 L26 26 Z" fill="currentColor"/></svg>
-  <svg id="hero-star-4" class="absolute text-tan opacity-0 scale-75 transition-all duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)] animate-floatY w-[32px] h-[32px] left-[15%] top-[70%]" style="--r:-5deg" viewBox="0 0 60 60"><path d="M30 5 L34 26 L55 30 L34 34 L30 55 L26 34 L5 30 L26 26 Z" fill="currentColor"/></svg>
-  <svg id="hero-star-5" class="absolute text-tan opacity-0 scale-75 transition-all duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)] animate-floatY w-[26px] h-[26px] left-[25%] top-[20%]" viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="currentColor" stroke-width="4"/><line x1="30" y1="8" x2="30" y2="52" stroke="currentColor" stroke-width="3"/><line x1="8" y1="30" x2="52" y2="30" stroke="currentColor" stroke-width="3"/></svg>
+
+  <svg id="hero-star-1" class="hidden sm:block absolute text-tan opacity-0 scale-75 transition-all duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)] animate-floatY w-[60px] h-[60px] left-[3%] top-[35%]" style="--r:-15deg" viewBox="0 0 60 60"><path d="M30 5 L34 26 L55 30 L34 34 L30 55 L26 34 L5 30 L26 26 Z" fill="currentColor"/></svg>
+  <svg id="hero-star-2" class="hidden sm:block absolute text-tan opacity-0 scale-75 transition-all duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)] animate-floatY w-[22px] h-[22px] right-[18%] top-[28%]" viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="currentColor" stroke-width="4"/><line x1="30" y1="8" x2="30" y2="52" stroke="currentColor" stroke-width="3"/><line x1="8" y1="30" x2="52" y2="30" stroke="currentColor" stroke-width="3"/></svg>
+  <svg id="hero-star-3" class="hidden sm:block absolute text-tan opacity-0 scale-75 transition-all duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)] animate-floatY w-[40px] h-[40px] right-[6%] top-[65%]" style="--r:20deg" viewBox="0 0 60 60"><path d="M30 5 L34 26 L55 30 L34 34 L30 55 L26 34 L5 30 L26 26 Z" fill="currentColor"/></svg>
+  <svg id="hero-star-4" class="hidden sm:block absolute text-tan opacity-0 scale-75 transition-all duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)] animate-floatY w-[32px] h-[32px] left-[15%] top-[70%]" style="--r:-5deg" viewBox="0 0 60 60"><path d="M30 5 L34 26 L55 30 L34 34 L30 55 L26 34 L5 30 L26 26 Z" fill="currentColor"/></svg>
+  <svg id="hero-star-5" class="hidden sm:block absolute text-tan opacity-0 scale-75 transition-all duration-[1400ms] ease-[cubic-bezier(0.25,1,0.5,1)] animate-floatY w-[26px] h-[26px] left-[25%] top-[20%]" viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="currentColor" stroke-width="4"/><line x1="30" y1="8" x2="30" y2="52" stroke="currentColor" stroke-width="3"/><line x1="8" y1="30" x2="52" y2="30" stroke="currentColor" stroke-width="3"/></svg>
 </section>
 
-<section id="about" class="bg-cream2 text-burgundy [background-image:linear-gradient(rgba(61,26,26,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(61,26,26,0.04)_1px,transparent_1px)] [background-size:48px_48px] py-12 px-5 md:px-10">
-<div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
+<section id="about" class="bg-cream2 text-burgundy [background-image:linear-gradient(rgba(61,26,26,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(61,26,26,0.04)_1px,transparent_1px)] [background-size:48px_48px] py-12 px-4 sm:px-6 md:px-10 w-full">
+<div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-16 items-center">
   <div>
-    <h2 class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] font-playfair text-[clamp(2.5rem,6vw,5rem)] leading-[1.0] text-burgundy mt-4 mb-4">A little bit<br><em class="font-fraunces italic font-normal">about me.</em></h2>
-    <p class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.35s] font-garamond text-xl leading-[1.7] text-burgundy max-w-[600px]">I'm a Software Developer specializing in the MERN Stack, passionate about building modern, scalable, and user-centric web applications. I enjoy turning ideas into powerful digital solutions by developing clean, efficient, and maintainable code across both frontend and backend technologies. With expertise in MongoDB, Express.js, React.js, Node.js, Next.js, JavaScript, Tailwind CSS, and SQL, I build high-performance applications that prioritize functionality, performance, and seamless user experiences. I thrive on solving real-world problems, learning emerging technologies, and continuously improving my craft as a developer.</p>
-    <p class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.45s] font-garamond text-[1.15rem] leading-[1.7] text-[rgba(61,26,26,0.82)] mt-6 max-w-[600px]">Driven by curiosity and a commitment to excellence, I'm always looking for opportunities to collaborate on meaningful projects, learn from new challenges, and build products that make a real-world impact.</p>
+    <h2 class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] font-playfair text-[clamp(2.25rem,6vw,5rem)] leading-[1.0] text-burgundy mt-4 mb-4">A little bit<br><em class="font-fraunces italic font-normal">about me.</em></h2>
+    <p class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.35s] font-garamond text-lg sm:text-xl leading-[1.7] text-burgundy max-w-[600px]">I'm a Software Developer specializing in the MERN Stack, passionate about building modern, scalable, and user-centric web applications. I enjoy turning ideas into powerful digital solutions by developing clean, efficient, and maintainable code across both frontend and backend technologies. With expertise in MongoDB, Express.js, React.js, Node.js, Next.js, JavaScript, Tailwind CSS, and SQL, I build high-performance applications that prioritize functionality, performance, and seamless user experiences. I thrive on solving real-world problems, learning emerging technologies, and continuously improving my craft as a developer.</p>
+    <p class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.45s] font-garamond text-[1.05rem] sm:text-[1.15rem] leading-[1.7] text-[rgba(61,26,26,0.82)] mt-6 max-w-[600px]">Driven by curiosity and a commitment to excellence, I'm always looking for opportunities to collaborate on meaningful projects, learn from new challenges, and build products that make a real-world impact.</p>
   </div>
 
-  <div class="reveal opacity-0 translate-x-[60px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.25s] flex justify-center items-center">
+  <div class="reveal opacity-0 translate-x-0 md:translate-x-[60px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.25s] flex justify-center items-center">
     <div class="flex flex-col items-center relative w-full">
       <div class="w-5 h-[100px] rounded-sm shadow-[2px_4px_10px_rgba(0,0,0,0.15)] relative z-10" style="background:linear-gradient(90deg,#5c2a2a,#3d1a1a 50%,#5c2a2a)"></div>
       <div class="w-8 h-6 rounded [background:linear-gradient(135deg,#ccc,#888)] -mt-1 relative z-[11] shadow-[0_3px_6px_rgba(0,0,0,0.16)] flex flex-col items-center justify-center">
         <div class="w-[14px] h-1.5 bg-[#444] rounded-[1px] mt-1.5"></div>
       </div>
-      <div class="bg-white text-[#3d1a1a] pt-[1.6rem] px-6 pb-5 rounded-2xl shadow-[0_25px_60px_rgba(61,26,26,0.2)] w-[300px] border border-[rgba(61,26,26,0.08)] text-center relative z-[5] -mt-1.5 rotate-1 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:rotate-0 hover:scale-[1.02]">
+      <div class="bg-white text-[#3d1a1a] pt-[1.6rem] px-6 pb-5 rounded-2xl shadow-[0_25px_60px_rgba(61,26,26,0.2)] w-full max-w-[300px] border border-[rgba(61,26,26,0.08)] text-center relative z-[5] -mt-1.5 rotate-1 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:rotate-0 hover:scale-[1.02]">
         <div class="w-12 h-2 bg-[#222] rounded-full mx-auto mb-5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]"></div>
         <div class="w-full h-[240px] bg-[#faf8f5] border border-[rgba(61,26,26,0.12)] rounded-md mb-5 flex items-center justify-center overflow-hidden shadow-[inset_0_2px_8px_rgba(0,0,0,0.03)]">
           <span class="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-[rgba(61,26,26,0.4)]"><img src="me.jpeg" alt="Your Photo" class="w-full h-full object-cover"></span>
@@ -141,19 +200,19 @@ tailwind.config = {
 </div>
 </section>
 
-<section id="experience" class="bg-burgundy [background-image:radial-gradient(circle,rgba(240,232,216,0.06)_1.5px,transparent_2px)] [background-size:24px_24px] py-12 px-5 md:px-10 border-b border-[rgba(240,232,216,0.05)]">
+<section id="experience" class="bg-burgundy [background-image:radial-gradient(circle,rgba(240,232,216,0.06)_1.5px,transparent_2px)] [background-size:24px_24px] py-12 px-4 sm:px-6 md:px-10 border-b border-[rgba(240,232,216,0.05)] w-full">
   <div class="max-w-[1100px] mx-auto">
-    <h2 class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] font-playfair text-[clamp(2.5rem,6vw,4.5rem)] leading-none text-cream tracking-tight mb-8">
+    <h2 class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] font-playfair text-[clamp(2.25rem,6vw,4.5rem)] leading-none text-cream tracking-tight mb-8">
       Work <span class="text-tan">&amp; </span><em class="font-fraunces italic font-normal">Experience</em>
     </h2>
 
     <div class="space-y-4">
-      
+
       <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.2s] flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[rgba(240,232,216,0.1)] pb-4">
         <div>
-          <h3 class="font-playfair text-2xl font-bold text-cream">Frontend Developer</h3>
+          <h3 class="font-playfair text-xl sm:text-2xl font-bold text-cream">Frontend Developer</h3>
           <p class="font-mono text-[0.78rem] tracking-wider text-tan font-normal mt-1">CodeWave Solution &bull; Remote</p>
-          <p class="font-garamond text-[1.15rem] leading-[1.6] mt-2 max-w-[680px] text-[rgba(240,232,216,0.9)]">
+          <p class="font-garamond text-lg sm:text-[1.15rem] leading-[1.6] mt-2 max-w-[680px] text-[rgba(240,232,216,0.9)]">
             Engineered scalable UI layers using React.js and Tailwind CSS, increasing user engagement by 30% through modular systems and crisp backend APIs.
           </p>
         </div>
@@ -164,9 +223,9 @@ tailwind.config = {
 
       <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.25s] flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[rgba(240,232,216,0.1)] pb-4">
         <div>
-          <h3 class="font-playfair text-2xl font-bold text-cream">Vocational Training</h3>
+          <h3 class="font-playfair text-xl sm:text-2xl font-bold text-cream">Vocational Training</h3>
           <p class="font-mono text-[0.78rem] tracking-wider text-tan font-normal mt-1">Ordnance Factory Khamaria &bull; Jabalpur</p>
-          <p class="font-garamond text-[1.15rem] leading-[1.6] mt-2 max-w-[680px] text-[rgba(240,232,216,0.9)]">
+          <p class="font-garamond text-lg sm:text-[1.15rem] leading-[1.6] mt-2 max-w-[680px] text-[rgba(240,232,216,0.9)]">
             Completed technical development tracks covering Advanced Excel data modeling, Cybersecurity frameworks, UTM controls, and enterprise operations.
           </p>
         </div>
@@ -177,9 +236,9 @@ tailwind.config = {
 
       <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.3s] flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 pb-2">
         <div>
-          <h3 class="font-playfair text-2xl font-bold text-cream">Research Intern</h3>
+          <h3 class="font-playfair text-xl sm:text-2xl font-bold text-cream">Research Intern</h3>
           <p class="font-mono text-[0.78rem] tracking-wider text-tan font-normal mt-1">MANIT &bull; Bhopal</p>
-          <p class="font-garamond text-[1.15rem] leading-[1.6] mt-2 max-w-[680px] text-[rgba(240,232,216,0.9)]">
+          <p class="font-garamond text-lg sm:text-[1.15rem] leading-[1.6] mt-2 max-w-[680px] text-[rgba(240,232,216,0.9)]">
             Analyzed software complexities, explored advanced algorithmic designs, and mapped system computing parameters under senior academic leadership.
           </p>
         </div>
@@ -192,44 +251,44 @@ tailwind.config = {
   </div>
 </section>
 
-<section id="stack" class="bg-cream2 text-burgundy [background-image:linear-gradient(rgba(61,26,26,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(61,26,26,0.04)_1px,transparent_1px)] [background-size:48px_48px] py-12 px-5 md:px-10">
-<div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+<section id="stack" class="bg-cream2 text-burgundy [background-image:linear-gradient(rgba(61,26,26,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(61,26,26,0.04)_1px,transparent_1px)] [background-size:48px_48px] py-12 px-4 sm:px-6 md:px-10 w-full">
+<div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
   <div>
-    <h2 class="font-playfair text-[clamp(3rem,7vw,5.5rem)] leading-[0.95] tracking-[-0.02em] text-burgundy">What&#8217;s In<br><em class="font-fraunces italic font-normal">my bag.</em></h2>
-    <p class="font-garamond text-[1.1rem] leading-[1.8] mt-8 max-w-[420px] text-[rgba(61,26,26,0.75)]">A fine balance between logic and expression. My core technical proficiency centers within contemporary frontend paradigms and complete MERN stack engineering, accented by robust professional leadership, event execution architecture, and creative graphic direction.</p>
+    <h2 class="font-playfair text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.95] tracking-[-0.02em] text-burgundy">What&#8217;s In<br><em class="font-fraunces italic font-normal">my bag.</em></h2>
+    <p class="font-garamond text-[1.05rem] sm:text-[1.1rem] leading-[1.8] mt-8 max-w-[420px] text-[rgba(61,26,26,0.75)]">A fine balance between logic and expression. My core technical proficiency centers within contemporary frontend paradigms and complete MERN stack engineering, accented by robust professional leadership, event execution architecture, and creative graphic direction.</p>
   </div>
-  
-  <div class="reveal opacity-0 translate-x-[60px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] flex justify-center">
-    <div id="skills-radial" class="relative w-[560px] h-[520px] max-w-full">
-      
-      <div id="skills-center-img" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-[250px] h-[280px]">
+
+  <div class="reveal opacity-0 translate-x-0 md:translate-x-[60px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] flex justify-center">
+    <div id="skills-radial" class="relative w-full max-w-[560px] aspect-[560/520]">
+
+      <div id="skills-center-img" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-[45%] h-[54%]">
         <img src="stack.png" alt="Toolkit Graphic" class="w-full h-full object-contain">
       </div>
-      
-      <svg id="skills-svg" class="absolute top-0 left-0 w-full h-full pointer-events-none z-[5] overflow-visible" viewBox="0 0 560 520"></svg>
+
+      <svg id="skills-svg" class="absolute top-0 left-0 w-full h-full pointer-events-none z-[5] overflow-visible" viewBox="0 0 560 520" preserveAspectRatio="xMidYMid meet"></svg>
     </div>
   </div>
 </div>
 </section>
 
-<section id="work" class="bg-burgundy [background-image:radial-gradient(circle,rgba(240,232,216,0.10)_1.5px,transparent_2px)] [background-size:30px_30px] py-10 px-5 md:px-10">
-<div class="max-w-[1400px] mx-auto">  
-  <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] h-[140px] relative overflow-hidden rounded-lg mb-12" style="background:repeating-linear-gradient(90deg, #e8dcc8 0 60px, #c8a87a 60px 120px, #e8dcc8 120px 180px, #2b1212 180px 230px, #f0e8d8 230px 290px)">
-    <div class="absolute left-8 top-1/2 -translate-y-1/2">
-      <div class="inline-block bg-[rgba(240,232,216,0.95)] text-burgundy font-playfair text-[clamp(1.5rem,3.5vw,2.5rem)] px-6 py-2 shadow-[0_4px_15px_rgba(0,0,0,0.15)] -rotate-1 tracking-wide">
+<section id="work" class="bg-burgundy [background-image:radial-gradient(circle,rgba(240,232,216,0.10)_1.5px,transparent_2px)] [background-size:30px_30px] py-10 px-4 sm:px-6 md:px-10 w-full">
+<div class="max-w-[1400px] mx-auto">
+  <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] h-[110px] sm:h-[140px] relative overflow-hidden rounded-lg mb-12" style="background:repeating-linear-gradient(90deg, #e8dcc8 0 60px, #c8a87a 60px 120px, #e8dcc8 120px 180px, #2b1212 180px 230px, #f0e8d8 230px 290px)">
+    <div class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2">
+      <div class="inline-block bg-[rgba(240,232,216,0.95)] text-burgundy font-playfair text-[clamp(1.15rem,3.5vw,2.5rem)] px-4 sm:px-6 py-2 shadow-[0_4px_15px_rgba(0,0,0,0.15)] -rotate-1 tracking-wide">
         Live Deployments
       </div>
     </div>
   </div>
-  
+
   <p class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.25s] font-fraunces italic text-lg text-[rgba(240,232,216,0.75)] max-w-[480px] mb-8">Functional software assets built from scratch, end-to-end.</p>
-  
+
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-4">
 
-    <a href="https://dev-drop-gamma.vercel.app" target="_blank" class="group reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] relative bg-cream text-burgundy p-7 rounded-md shadow-[0_12px_40px_rgba(0,0,0,0.25)] no-underline block hover:!rotate-0 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3)] rotate-[-1.5deg] duration-500">
+    <a href="https://dev-drop-gamma.vercel.app" target="_blank" class="group reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] relative bg-cream text-burgundy p-6 sm:p-7 rounded-md shadow-[0_12px_40px_rgba(0,0,0,0.25)] no-underline block hover:!rotate-0 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3)] sm:rotate-[-1.5deg] duration-500">
       <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 -rotate-3 w-20 h-6 bg-[rgba(200,168,122,0.75)] shadow-[0_2px_6px_rgba(0,0,0,0.15)]"></div>
       <div class="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-[rgba(61,26,26,0.5)]">01 &middot; Marketplace</div>
-      <h3 class="font-playfair text-[clamp(1.6rem,3vw,2.4rem)] leading-[1.05] text-burgundy mt-3">DevDrop</h3>
+      <h3 class="font-playfair text-[clamp(1.4rem,3vw,2.4rem)] leading-[1.05] text-burgundy mt-3">DevDrop</h3>
       <p class="font-garamond text-base leading-[1.65] text-[rgba(61,26,26,0.75)] mt-4">Full-stack web template marketplace asset. Leverages granular MongoDB database schemas for secure relational document lookup, backend authentication APIs, and CRUD modules.</p>
       <div class="flex flex-wrap gap-2 mt-4">
         <span class="font-mono text-[0.55rem] uppercase tracking-[0.15em] text-[rgba(61,26,26,0.6)] border border-[rgba(61,26,26,0.2)] px-[0.6rem] py-1 rounded-full">React.js</span>
@@ -243,10 +302,10 @@ tailwind.config = {
       </div>
     </a>
 
-    <a href="http://www.codewavesolution.in/" target="_blank" class="group reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.25s] relative bg-cream text-burgundy p-7 rounded-md shadow-[0_12px_40px_rgba(0,0,0,0.25)] no-underline block hover:!rotate-0 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3)] rotate-1 duration-500">
+    <a href="http://www.codewavesolution.in/" target="_blank" class="group reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.25s] relative bg-cream text-burgundy p-6 sm:p-7 rounded-md shadow-[0_12px_40px_rgba(0,0,0,0.25)] no-underline block hover:!rotate-0 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3)] sm:rotate-1 duration-500">
       <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 -rotate-3 w-20 h-6 bg-[rgba(200,168,122,0.75)] shadow-[0_2px_6px_rgba(0,0,0,0.15)]"></div>
       <div class="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-[rgba(61,26,26,0.5)]">02 &middot; Edtech Platform</div>
-      <h3 class="font-playfair text-[clamp(1.6rem,3vw,2.4rem)] leading-[1.05] text-burgundy mt-3">CodeWave Solution</h3>
+      <h3 class="font-playfair text-[clamp(1.4rem,3vw,2.4rem)] leading-[1.05] text-burgundy mt-3">CodeWave Solution</h3>
       <p class="font-garamond text-base leading-[1.65] text-[rgba(61,26,26,0.75)] mt-4">Scalable MERN-stack environment supporting interactive coding tracks. Designed with high-performance responsive interfaces via Tailwind configurations and custom REST architecture endpoints.</p>
       <div class="flex flex-wrap gap-2 mt-4">
         <span class="font-mono text-[0.55rem] uppercase tracking-[0.15em] text-[rgba(61,26,26,0.6)] border border-[rgba(61,26,26,0.2)] px-[0.6rem] py-1 rounded-full">React.js</span>
@@ -260,10 +319,10 @@ tailwind.config = {
       </div>
     </a>
 
-    <a href="https://instant-errands.vercel.app" target="_blank" class="group reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.35s] relative bg-cream text-burgundy p-7 rounded-md shadow-[0_12px_40px_rgba(0,0,0,0.25)] no-underline block hover:!rotate-0 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3)] rotate-[-0.5deg] duration-500">
+    <a href="https://instant-errands.vercel.app" target="_blank" class="group reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.35s] relative bg-cream text-burgundy p-6 sm:p-7 rounded-md shadow-[0_12px_40px_rgba(0,0,0,0.25)] no-underline block hover:!rotate-0 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3)] sm:rotate-[-0.5deg] duration-500">
       <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 -rotate-3 w-20 h-6 bg-[rgba(200,168,122,0.75)] shadow-[0_2px_6px_rgba(0,0,0,0.15)]"></div>
       <div class="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-[rgba(61,26,26,0.5)]">03 &middot; On-Demand Services</div>
-      <h3 class="font-playfair text-[clamp(1.6rem,3vw,2.4rem)] leading-[1.05] text-burgundy mt-3">Quick Serve</h3>
+      <h3 class="font-playfair text-[clamp(1.4rem,3vw,2.4rem)] leading-[1.05] text-burgundy mt-3">Quick Serve</h3>
       <p class="font-garamond text-base leading-[1.65] text-[rgba(61,26,26,0.75)] mt-4">An instant booking service portal pairing home service professionals within a 30-60 minute window. Built clean using React + Vite on a lightweight asynchronous server architecture.</p>
       <div class="flex flex-wrap gap-2 mt-4">
         <span class="font-mono text-[0.55rem] uppercase tracking-[0.15em] text-[rgba(61,26,26,0.6)] border border-[rgba(61,26,26,0.2)] px-[0.6rem] py-1 rounded-full">React</span>
@@ -281,19 +340,19 @@ tailwind.config = {
 </div>
 </section>
 
-<section id="education" class="bg-cream2 text-burgundy [background-image:linear-gradient(rgba(61,26,26,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(61,26,26,0.04)_1px,transparent_1px)] [background-size:48px_48px] py-12 px-5 md:px-10">
+<section id="education" class="bg-cream2 text-burgundy [background-image:linear-gradient(rgba(61,26,26,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(61,26,26,0.04)_1px,transparent_1px)] [background-size:48px_48px] py-12 px-4 sm:px-6 md:px-10 w-full">
 <div class="max-w-[1400px] mx-auto">
-  <h2 class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] font-playfair text-[clamp(2.5rem,7vw,6rem)] leading-[0.95] tracking-[-0.02em] mb-14 text-burgundy">Education &amp;<br><em class="font-fraunces italic font-normal text-burgundy">Credentials.</em></h2>
+  <h2 class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] font-playfair text-[clamp(2.25rem,7vw,6rem)] leading-[0.95] tracking-[-0.02em] mb-14 text-burgundy">Education &amp;<br><em class="font-fraunces italic font-normal text-burgundy">Credentials.</em></h2>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-    <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] bg-burgundy text-cream p-8 rounded-md shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-[rgba(240,232,216,0.12)] transition-transform hover:-translate-y-[5px]">
+    <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] bg-burgundy text-cream p-6 sm:p-8 rounded-md shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-[rgba(240,232,216,0.12)] transition-transform hover:-translate-y-[5px]">
       <div class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-tan mb-3">Graduating 2027</div>
-      <h3 class="font-playfair text-2xl leading-[1.2] mb-2">B.Tech in Computer Science</h3>
+      <h3 class="font-playfair text-xl sm:text-2xl leading-[1.2] mb-2">B.Tech in Computer Science</h3>
       <div class="font-fraunces italic text-lg text-[rgba(240,232,216,0.8)] mb-4">Gyan Ganga Institute of Technology and Sciences</div>
       <div class="inline-block bg-[rgba(240,232,216,0.15)] text-cream font-mono text-[0.6rem] px-[0.8rem] py-[0.3rem] rounded-full tracking-[0.1em]">Cumulative CGPA: 8.33</div>
     </div>
-    <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.25s] bg-burgundy text-cream p-8 rounded-md shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-[rgba(240,232,216,0.12)] transition-transform hover:-translate-y-[5px]">
+    <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.25s] bg-burgundy text-cream p-6 sm:p-8 rounded-md shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-[rgba(240,232,216,0.12)] transition-transform hover:-translate-y-[5px]">
       <div class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-tan mb-3">CBSE Board Certification</div>
-      <h3 class="font-playfair text-2xl leading-[1.2] mb-2">Higher Secondary Education</h3>
+      <h3 class="font-playfair text-xl sm:text-2xl leading-[1.2] mb-2">Higher Secondary Education</h3>
       <div class="font-fraunces italic text-lg text-[rgba(240,232,216,0.8)] mb-4">Christ Church Girls Senior Secondary School</div>
       <div class="inline-block bg-[rgba(240,232,216,0.15)] text-cream font-mono text-[0.6rem] px-[0.8rem] py-[0.3rem] rounded-full tracking-[0.1em]">10th Grade: 93% &nbsp;&middot;&nbsp; 12th Grade: 87%</div>
     </div>
@@ -301,23 +360,23 @@ tailwind.config = {
 </div>
 </section>
 
-<section id="certifications" class="bg-burgundy [background-image:radial-gradient(circle,rgba(240,232,216,0.10)_1.5px,transparent_2px)] [background-size:28px_28px] py-12 px-5 md:px-10">
+<section id="certifications" class="bg-burgundy [background-image:radial-gradient(circle,rgba(240,232,216,0.10)_1.5px,transparent_2px)] [background-size:28px_28px] py-12 px-4 sm:px-6 md:px-10 w-full">
 <div class="max-w-[1400px] mx-auto">
-  <h2 class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] font-playfair text-[clamp(2.5rem,6vw,4.5rem)] text-cream">Certifications.</h2>
+  <h2 class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] font-playfair text-[clamp(2.25rem,6vw,4.5rem)] text-cream">Certifications.</h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
-    <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] bg-cream text-burgundy p-6 rounded-md shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all -rotate-1 hover:rotate-0 hover:scale-[1.03] hover:shadow-[0_16px_50px_rgba(0,0,0,0.3)]">
+    <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.15s] bg-cream text-burgundy p-6 rounded-md shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all sm:-rotate-1 hover:rotate-0 hover:scale-[1.03] hover:shadow-[0_16px_50px_rgba(0,0,0,0.3)]">
       <div class="font-playfair text-xl">Cisco Networks</div>
       <p class="font-garamond text-sm leading-[1.6] text-[rgba(61,26,26,0.72)] mt-2">C++ Essentials, Core C, Python, Web Architecture (HTML/CSS/JS), Data Analysis, &amp; AI Frameworks.</p>
     </div>
-    <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.25s] bg-cream text-burgundy p-6 rounded-md shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all rotate-1 hover:rotate-0 hover:scale-[1.03] hover:shadow-[0_16px_50px_rgba(0,0,0,0.3)]">
+    <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.25s] bg-cream text-burgundy p-6 rounded-md shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all sm:rotate-1 hover:rotate-0 hover:scale-[1.03] hover:shadow-[0_16px_50px_rgba(0,0,0,0.3)]">
       <div class="font-playfair text-xl">Google Cloud</div>
       <p class="font-garamond text-sm leading-[1.6] text-[rgba(61,26,26,0.72)] mt-2">Earned 15 official Google Developer Group course badges paired with an Arcade Cloud milestone completion.</p>
     </div>
-    <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.35s] bg-cream text-burgundy p-6 rounded-md shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all -rotate-1 hover:rotate-0 hover:scale-[1.03] hover:shadow-[0_16px_50px_rgba(0,0,0,0.3)]">
+    <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.35s] bg-cream text-burgundy p-6 rounded-md shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all sm:-rotate-1 hover:rotate-0 hover:scale-[1.03] hover:shadow-[0_16px_50px_rgba(0,0,0,0.3)]">
       <div class="font-playfair text-xl">AWS Foundations</div>
       <p class="font-garamond text-sm leading-[1.6] text-[rgba(61,26,26,0.72)] mt-2">AWS Cloud Foundation validation detailing modern distributed cloud architectures and global instances.</p>
     </div>
-    <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.45s] bg-cream text-burgundy p-6 rounded-md shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all rotate-1 hover:rotate-0 hover:scale-[1.03] hover:shadow-[0_16px_50px_rgba(0,0,0,0.3)]">
+    <div class="reveal opacity-0 translate-y-[50px] transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transition-delay:0.45s] bg-cream text-burgundy p-6 rounded-md shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all sm:rotate-1 hover:rotate-0 hover:scale-[1.03] hover:shadow-[0_16px_50px_rgba(0,0,0,0.3)]">
       <div class="font-playfair text-xl">TCS Core Skills</div>
       <p class="font-garamond text-sm leading-[1.6] text-[rgba(61,26,26,0.72)] mt-2">TCS Professional Soft Skill Certification confirming public relations, negotiation, and leadership qualities.</p>
     </div>
@@ -325,63 +384,63 @@ tailwind.config = {
 </div>
 </section>
 
-<section id="contact" class="bg-cream2 text-burgundy [background-image:linear-gradient(rgba(61,26,26,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(61,26,26,0.04)_1px,transparent_1px)] [background-size:48px_48px] py-14 px-5 md:px-10 border-t border-burgundy/10">
+<section id="contact" class="bg-cream2 text-burgundy [background-image:linear-gradient(rgba(61,26,26,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(61,26,26,0.04)_1px,transparent_1px)] [background-size:48px_48px] py-14 px-4 sm:px-6 md:px-10 border-t border-burgundy/10 w-full">
   <div class="max-w-[1100px] mx-auto">
-    
+
     <div class="text-center max-w-xl mx-auto mb-12">
-      <h2 class="font-playfair text-[clamp(2.5rem,5vw,3.8rem)] leading-[1.1] font-bold tracking-tight text-burgundy">
+      <h2 class="font-playfair text-[clamp(2.25rem,5vw,3.8rem)] leading-[1.1] font-bold tracking-tight text-burgundy">
         Let&#8217;s connect <br><em class="font-fraunces italic font-normal text-burgundy">&amp; talk.</em>
       </h2>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
-      
+
       <div class="space-y-4">
         <div class="font-mono text-xs uppercase tracking-[0.2em] text-burgundy font-black pl-1 border-b border-burgundy/10 pb-2">
           CONTACT ME ON
         </div>
         <div class="space-y-3">
-          
+
           <a href="mailto:rideemasinghjbp@gmail.com" class="flex items-center justify-between bg-white border border-burgundy/10 rounded-lg p-4 shadow-sm hover:border-burgundy hover:shadow-md transition-all duration-300 group">
-            <div class="flex items-center gap-4">
-              <div class="w-9 h-9 rounded-full bg-burgundy/5 flex items-center justify-center text-burgundy group-hover:bg-burgundy group-hover:text-cream transition-colors duration-300">
+            <div class="flex items-center gap-4 min-w-0">
+              <div class="w-9 h-9 rounded-full bg-burgundy/5 flex items-center justify-center text-burgundy group-hover:bg-burgundy group-hover:text-cream transition-colors duration-300 shrink-0">
                 <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                   <polyline points="22,6 12,13 2,6"></polyline>
                 </svg>
               </div>
-              <div class="flex flex-col">
+              <div class="flex flex-col min-w-0">
                 <span class="font-playfair text-base font-bold text-burgundy">Send Email</span>
-                <span class="font-mono text-[0.7rem] text-burgundy/60">rideemasinghjbp@gmail.com</span>
+                <span class="font-mono text-[0.7rem] text-burgundy/60 truncate">rideemasinghjbp@gmail.com</span>
               </div>
             </div>
-            <span class="font-mono text-xs text-burgundy/40 group-hover:translate-x-1 transition-transform">&rarr;</span>
+            <span class="font-mono text-xs text-burgundy/40 group-hover:translate-x-1 transition-transform shrink-0 ml-2">&rarr;</span>
           </a>
 
           <a href="https://wa.me/918641050025?text=Hello%20Rideema,%20I%20visited%20your%20portfolio." target="_blank" class="flex items-center justify-between bg-white border border-burgundy/10 rounded-lg p-4 shadow-sm hover:border-burgundy hover:shadow-md transition-all duration-300 group">
-            <div class="flex items-center gap-4">
-              <div class="w-9 h-9 rounded-full bg-burgundy/5 flex items-center justify-center text-burgundy group-hover:bg-burgundy group-hover:text-cream transition-colors duration-300">
+            <div class="flex items-center gap-4 min-w-0">
+              <div class="w-9 h-9 rounded-full bg-burgundy/5 flex items-center justify-center text-burgundy group-hover:bg-burgundy group-hover:text-cream transition-colors duration-300 shrink-0">
                 <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
                 </svg>
               </div>
-              <div class="flex flex-col">
+              <div class="flex flex-col min-w-0">
                 <span class="font-playfair text-base font-bold text-burgundy">WhatsApp Message</span>
                 <span class="font-mono text-[0.7rem] text-burgundy/60">+91 86410 50025</span>
               </div>
             </div>
-            <span class="font-mono text-xs text-burgundy/40 group-hover:translate-x-1 transition-transform">&rarr;</span>
+            <span class="font-mono text-xs text-burgundy/40 group-hover:translate-x-1 transition-transform shrink-0 ml-2">&rarr;</span>
           </a>
 
           <div class="flex items-center bg-white border border-burgundy/10 rounded-lg p-4 shadow-sm select-none">
-            <div class="flex items-center gap-4">
-              <div class="w-9 h-9 rounded-full bg-burgundy/5 flex items-center justify-center text-burgundy">
+            <div class="flex items-center gap-4 min-w-0">
+              <div class="w-9 h-9 rounded-full bg-burgundy/5 flex items-center justify-center text-burgundy shrink-0">
                 <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                   <circle cx="12" cy="10" r="3"></circle>
                 </svg>
               </div>
-              <div class="flex flex-col">
+              <div class="flex flex-col min-w-0">
                 <span class="font-playfair text-base font-bold text-burgundy">Location Base</span>
                 <span class="font-mono text-[0.7rem] text-burgundy/60">Jabalpur, MP, India</span>
               </div>
@@ -396,53 +455,53 @@ tailwind.config = {
           SOCIAL PROFILES
         </div>
         <div class="space-y-3">
-          
+
           <a href="https://www.linkedin.com/in/rideema-singh-3455472b4/" target="_blank" class="flex items-center justify-between bg-white border border-burgundy/10 rounded-lg p-4 shadow-sm hover:border-burgundy hover:shadow-md transition-all duration-300 group">
-            <div class="flex items-center gap-4">
-              <div class="w-9 h-9 rounded-full bg-burgundy/5 flex items-center justify-center text-burgundy group-hover:bg-burgundy group-hover:text-cream transition-colors duration-300">
+            <div class="flex items-center gap-4 min-w-0">
+              <div class="w-9 h-9 rounded-full bg-burgundy/5 flex items-center justify-center text-burgundy group-hover:bg-burgundy group-hover:text-cream transition-colors duration-300 shrink-0">
                 <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                   <rect x="2" y="9" width="4" height="12"></rect>
                   <circle cx="4" cy="4" r="2"></circle>
                 </svg>
               </div>
-              <div class="flex flex-col">
+              <div class="flex flex-col min-w-0">
                 <span class="font-playfair text-base font-bold text-burgundy">LinkedIn</span>
                 <span class="font-mono text-[0.7rem] text-burgundy/60">Professional Matrix</span>
               </div>
             </div>
-            <span class="font-mono text-xs text-burgundy/40 group-hover:translate-x-1 transition-transform">&rarr;</span>
+            <span class="font-mono text-xs text-burgundy/40 group-hover:translate-x-1 transition-transform shrink-0 ml-2">&rarr;</span>
           </a>
 
           <a href="https://github.com/Rideema14" target="_blank" class="flex items-center justify-between bg-white border border-burgundy/10 rounded-lg p-4 shadow-sm hover:border-burgundy hover:shadow-md transition-all duration-300 group">
-            <div class="flex items-center gap-4">
-              <div class="w-9 h-9 rounded-full bg-burgundy/5 flex items-center justify-center text-burgundy group-hover:bg-burgundy group-hover:text-cream transition-colors duration-300">
+            <div class="flex items-center gap-4 min-w-0">
+              <div class="w-9 h-9 rounded-full bg-burgundy/5 flex items-center justify-center text-burgundy group-hover:bg-burgundy group-hover:text-cream transition-colors duration-300 shrink-0">
                 <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                 </svg>
               </div>
-              <div class="flex flex-col">
+              <div class="flex flex-col min-w-0">
                 <span class="font-playfair text-base font-bold text-burgundy">GitHub</span>
                 <span class="font-mono text-[0.7rem] text-burgundy/60">Source Code Repositories</span>
               </div>
             </div>
-            <span class="font-mono text-xs text-burgundy/40 group-hover:translate-x-1 transition-transform">&rarr;</span>
+            <span class="font-mono text-xs text-burgundy/40 group-hover:translate-x-1 transition-transform shrink-0 ml-2">&rarr;</span>
           </a>
 
           <a href="https://leetcode.com/u/RideemaSingh" target="_blank" class="flex items-center justify-between bg-white border border-burgundy/10 rounded-lg p-4 shadow-sm hover:border-burgundy hover:shadow-md transition-all duration-300 group">
-            <div class="flex items-center gap-4">
-              <div class="w-9 h-9 rounded-full bg-burgundy/5 flex items-center justify-center text-burgundy group-hover:bg-burgundy group-hover:text-cream transition-colors duration-300">
+            <div class="flex items-center gap-4 min-w-0">
+              <div class="w-9 h-9 rounded-full bg-burgundy/5 flex items-center justify-center text-burgundy group-hover:bg-burgundy group-hover:text-cream transition-colors duration-300 shrink-0">
                 <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M14.5 21a6.5 6.5 0 1 1 0-13 6.5 6.5 0 0 1 0 13z"></path>
                   <path d="m9 13 2.5 2.5L16 10"></path>
                 </svg>
               </div>
-              <div class="flex flex-col">
+              <div class="flex flex-col min-w-0">
                 <span class="font-playfair text-base font-bold text-burgundy">LeetCode</span>
                 <span class="font-mono text-[0.7rem] text-burgundy/60">Algorithmic Syntax Profiles</span>
               </div>
             </div>
-            <span class="font-mono text-xs text-burgundy/40 group-hover:translate-x-1 transition-transform">&rarr;</span>
+            <span class="font-mono text-xs text-burgundy/40 group-hover:translate-x-1 transition-transform shrink-0 ml-2">&rarr;</span>
           </a>
 
         </div>
@@ -451,7 +510,7 @@ tailwind.config = {
     </div>
 
     <div class="flex justify-center items-center pt-6 mt-10 border-t border-burgundy/5 font-mono text-[0.85rem] uppercase tracking-wider text-burgundy/30">
-      <span class="font-caveat text-6xl normal-case tracking-normal text-burgundy/80 "> Thanks For Visiting!!</span>
+      <span class="font-caveat text-4xl sm:text-5xl md:text-6xl normal-case tracking-normal text-burgundy/80 text-center"> Thanks For Visiting!!</span>
     </div>
 
   </div>
@@ -469,18 +528,15 @@ const heroEntries = ['hero-title', 'hero-sub', 'hero-tag', 'hero-ctas'];
 const heroStars = ['hero-star-1', 'hero-star-2', 'hero-star-3', 'hero-star-4', 'hero-star-5'];
 
 function launchSite(){
-  // 1. Gently fade out the loader text first
   if(txtWrapper) {
     txtWrapper.style.opacity = '0';
     txtWrapper.style.transform = 'scale(0.97)';
   }
 
-  // 2. Open shutters with a luxury overlapping timeline
   setTimeout(() => {
     ipTop.style.transform = 'translateY(-100%)';
     ipBot.style.transform = 'translateY(100%)';
-    
-    // 3. BLENDED ENTRY: Let hero section begin fading in WHILE curtains are still actively gliding away
+
     setTimeout(() => {
       if(nav) {
         nav.style.opacity = '1';
@@ -504,11 +560,10 @@ function launchSite(){
           el.style.transform = 'translateY(0) scale(1)';
         }
       });
-      
+
       startReveal();
-    }, 450); // Starts the entry right mid-way through shutter motion for organic blending
-    
-    // Completely remove layout nodes only when full canvas motion finishes
+    }, 450);
+
     setTimeout(() => {
       overlay.style.display = 'none';
     }, 1400);
@@ -516,7 +571,6 @@ function launchSite(){
   }, 400);
 }
 
-// Initial script countdown trigger
 setTimeout(launchSite, 2000);
 
 function startReveal(){
@@ -558,7 +612,7 @@ function startReveal(){
     var ly = cy + radius * Math.sin(rad);
 
     var lbl = document.createElement('div');
-    lbl.className = 'absolute z-[8] font-caveat text-2xl text-burgundy whitespace-nowrap -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-0 transition-opacity duration-500';
+    lbl.className = 'absolute z-[8] font-caveat text-base sm:text-xl md:text-2xl text-burgundy whitespace-nowrap -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-0 transition-opacity duration-500';
     lbl.textContent = skill.name;
     lbl.style.left = (lx / cW * 100) + '%';
     lbl.style.top  = (ly / cH * 100) + '%';
@@ -635,6 +689,38 @@ window.addEventListener('scroll', () => {
   sections.forEach(s => { if(window.scrollY >= s.offsetTop - 100) cur = s.id; });
   navAs.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? '#f0e8d8' : ''; });
 }, {passive: true});
+
+// ── MOBILE MENU TOGGLE
+(function(){
+  var btn = document.getElementById('mobile-menu-btn');
+  var menu = document.getElementById('mobile-menu');
+  if(!btn || !menu) return;
+  var open = false;
+
+  function setOpen(state){
+    open = state;
+    btn.setAttribute('aria-expanded', String(open));
+    if(open){
+      menu.style.maxHeight = menu.scrollHeight + 'px';
+      btn.querySelectorAll('.mm-bar')[0].style.transform = 'translateY(7px) rotate(45deg)';
+      btn.querySelectorAll('.mm-bar')[1].style.opacity = '0';
+      btn.querySelectorAll('.mm-bar')[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+    } else {
+      menu.style.maxHeight = '0px';
+      btn.querySelectorAll('.mm-bar')[0].style.transform = 'none';
+      btn.querySelectorAll('.mm-bar')[1].style.opacity = '1';
+      btn.querySelectorAll('.mm-bar')[2].style.transform = 'none';
+    }
+  }
+
+  btn.addEventListener('click', function(){ setOpen(!open); });
+  menu.querySelectorAll('.mm-link').forEach(function(a){
+    a.addEventListener('click', function(){ setOpen(false); });
+  });
+  window.addEventListener('resize', function(){
+    if(window.innerWidth >= 768 && open) setOpen(false);
+  });
+})();
 </script>
 </body>
 </html>
